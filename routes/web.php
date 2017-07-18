@@ -11,10 +11,18 @@
 |
 */
 
+use App\Http\RouteConstants;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', 'HomeController@index')
+        ->name(RouteConstants::HOME);
+
+    Route::get('/devices', 'HomeController@deviceRegistration')
+        ->name(RouteConstants::DEVICE_REGISTRATION);
+});
