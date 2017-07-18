@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/devices/register', function () {
+    dd('Device registration page!');
+});
