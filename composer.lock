@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "528e54e54e977a55f5cf66aef6257192",
-    "content-hash": "efb0583900b247df78ea51ab2d97affe",
+    "hash": "7d14d20a71b3c307e2686b43225db9ec",
+    "content-hash": "ba3510dffbc961deaf3c64029fb5911a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -235,6 +235,49 @@
                 }
             ],
             "time": "2015-04-20 18:58:01"
+        },
+        {
+            "name": "jamesaspence/laravel-core-model",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jamesaspence/laravel-core-model.git",
+                "reference": "7d5fd659593eeb134a825fc3c2bffbee28665292"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jamesaspence/laravel-core-model/zipball/7d5fd659593eeb134a825fc3c2bffbee28665292",
+                "reference": "7d5fd659593eeb134a825fc3c2bffbee28665292",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.3"
+            },
+            "suggest": {
+                "illuminate/pagination": "(Required to paginate the result set (^5.3).)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laracore\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Spence",
+                    "email": "Jamesaspence20@gmail.com"
+                }
+            ],
+            "description": "A laravel core model layer, with factories and repositories.",
+            "time": "2017-06-15 05:10:17"
         },
         {
             "name": "laravel/framework",
