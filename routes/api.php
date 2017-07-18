@@ -13,6 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::any('/tests', function () {
-    return response()->json('success');
-});
+Route::post('tests', 'TestController@logSpeed');
