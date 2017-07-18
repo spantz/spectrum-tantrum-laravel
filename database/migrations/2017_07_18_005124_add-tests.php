@@ -18,7 +18,7 @@ class AddTests extends Migration
             $table->integer('device_id', false, true);
             $table->double('download_speed');
             $table->double('upload_speed');
-            $table->timestamps;
+            $table->timestamps();
         });
     }
 
