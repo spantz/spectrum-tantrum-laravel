@@ -4,7 +4,7 @@
 namespace App\Http;
 
 
-class RouteUtils
+class RouteConstants
 {
     /*
      * Route Names

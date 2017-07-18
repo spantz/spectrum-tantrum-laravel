@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\RouteUtils;
+use App\Http\RouteConstants;
+use App\Http\ViewConstants;
 use App\Models\Repository\DeviceRepository;
 use Illuminate\Http\Request;
 
@@ -19,10 +20,10 @@ class HomeController extends Controller
     public function index(Request $request, DeviceRepository $repository)
     {
         if (!$repository->userHasDevices($request->user())) {
-            return redirect()->route(RouteUtils::DEVICE_REGISTRATION);
+            return redirect()->route(RouteConstants::DEVICE_REGISTRATION);
         }
 
-        return view('home');
+        return view(ViewConstants::HOME);
     }
 
     /**
@@ -34,6 +35,6 @@ class HomeController extends Controller
      */
     public function deviceRegistration(Request $request)
     {
-        return view('deviceRegistration', ['user' => $request->user()]);
+        return view(ViewConstants::DEVICE_REGISTRATION, ['user' => $request->user()]);
     }
 }

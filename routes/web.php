@@ -11,7 +11,7 @@
 |
 */
 
-use App\Http\RouteUtils;
+use App\Http\RouteConstants;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,8 +21,8 @@ Route::auth();
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')
-        ->name(RouteUtils::HOME);
+        ->name(RouteConstants::HOME);
 
     Route::get('/devices', 'HomeController@deviceRegistration')
-        ->name(RouteUtils::DEVICE_REGISTRATION);
+        ->name(RouteConstants::DEVICE_REGISTRATION);
 });
