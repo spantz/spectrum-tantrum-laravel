@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index')->name(RouteUtils::HOME);
+Route::middleware('auth')->group(function () {
+    Route::get('/home', 'HomeController@index')
+        ->name(RouteUtils::HOME);
 
-Route::get('/devices/register', function () {
-    dd('Device registration page!');
-})->name(RouteUtils::DEVICE_REGISTRATION);
+    Route::get('/devices/register', 'HomeController@deviceRegistration')
+        ->name(RouteUtils::DEVICE_REGISTRATION);
+});

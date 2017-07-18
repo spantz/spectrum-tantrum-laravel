@@ -28,4 +28,9 @@ class HomeController extends Controller
 
         return view('home');
     }
+
+    public function deviceRegistration(Request $request)
+    {
+        return view('deviceRegistration', ['user' => $request->user()]);
+    }
 }
