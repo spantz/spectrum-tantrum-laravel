@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\Factory\UserFactory;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -23,15 +24,21 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
+     * @var UserFactory
+     */
+    private $factory;
+
+    /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/home';
 
-    public function __construct()
+    public function __construct(UserFactory $factory)
     {
         $this->middleware('guest');
+        $this->factory = $factory;
     }
 
     /**
@@ -53,14 +60,21 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $factory = $this->factory;
+        /** @var User $user */
+        $user = $factory
+            ->make([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'token' => $factory->getRepository()
+                    ->generateUniqueToken()
+            ]);
+
+        return $user;
     }
 }
