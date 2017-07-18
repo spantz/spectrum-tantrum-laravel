@@ -11,14 +11,16 @@
 |
 */
 
+use App\Http\RouteUtils;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name(RouteUtils::HOME);
 
 Route::get('/devices/register', function () {
     dd('Device registration page!');
-});
+})->name(RouteUtils::DEVICE_REGISTRATION);

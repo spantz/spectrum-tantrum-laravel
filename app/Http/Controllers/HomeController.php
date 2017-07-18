@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\RouteUtils;
 use App\Models\Repository\DeviceRepository;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,9 @@ class HomeController extends Controller
     public function index(Request $request, DeviceRepository $repository)
     {
         if (!$repository->userHasDevices($request->user())) {
-            return redirect('/devices/register');
+            return redirect()->route(RouteUtils::DEVICE_REGISTRATION);
         }
+
         return view('home');
     }
 }
