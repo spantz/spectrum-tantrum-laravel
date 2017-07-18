@@ -25,7 +25,7 @@ class UserRepository extends ModelRepository
     public function generateUniqueToken(): string
     {
         do {
-            $token = str_random(32);
+            $token = str_random(48);
         } while ($this->userWithTokenExists($token));
 
         return $token;
