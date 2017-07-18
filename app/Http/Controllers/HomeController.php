@@ -16,6 +16,7 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @method GET
      * @param Request $request
      * @param DeviceRepository $repository
      * @return \Illuminate\Http\Response
@@ -29,6 +30,13 @@ class HomeController extends Controller
         return view('home');
     }
 
+    /**
+     * Device registration route.
+     *
+     * @method GET
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function deviceRegistration(Request $request)
     {
         return view('deviceRegistration', ['user' => $request->user()]);

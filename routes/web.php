@@ -23,6 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')
         ->name(RouteUtils::HOME);
 
-    Route::get('/devices/register', 'HomeController@deviceRegistration')
+    Route::get('/devices', 'HomeController@deviceRegistration')
         ->name(RouteUtils::DEVICE_REGISTRATION);
 });
