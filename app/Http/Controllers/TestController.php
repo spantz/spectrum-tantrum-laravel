@@ -36,10 +36,15 @@ class TestController extends Controller
 
         $test = $factory->make([
             'device_id' => $request->device_id,
-            'download_speed' => $request->input('speed.down'),
-            'upload_speed' => $request->input('speed.up'),
+            'download_speed' => $this->convertSpeedToKilobytes($request->input('speed.down')),
+            'upload_speed' => $this->convertSpeedToKilobytes($request->input('speed.up')),
         ]);
 
         return response()->json('success');
+    }
+
+    private function convertSpeedToKilobytes($speed)
+    {
+        return round($speed * 125,2);
     }
 }
