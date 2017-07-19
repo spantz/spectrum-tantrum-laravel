@@ -10,33 +10,35 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Test;
+use Laracore\Factory\ModelFactory;
+use Laracore\Repository\ModelRepository;
 
 
 class TestController extends Controller
 {
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function logSpeed(Request $request)
+    public function logSpeed(ModelFactory $factory, Request $request)
     {
         //TODO: validate API credentials
 
         $this->validate($request, [
-            'download_speed' => 'required',
-            'upload_speed' => 'required',
-            'timestamp' => 'required',
+            'speed.up' => 'required',
+            'speed.down' => 'required',
+            'timestamp.start' => 'required',
+            'timestamp.end' => 'required',
         ]);
 
-        //TODO: rewrite using LaraCore
+        $factory->setRepository(new ModelRepository(Test::Class));
 
-        $test = Test::create([
+        $test = $factory->make([
             'device_id' => $request->device_id,
-            'download_speed' => $request->download_speed,
-            'upload_speed' => $request->upload_speed,
+            'download_speed' => $request->input('speed.down'),
+            'upload_speed' => $request->input('speed.up'),
         ]);
-
 
         return response()->json('success');
     }
