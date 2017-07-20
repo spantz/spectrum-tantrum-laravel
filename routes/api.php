@@ -13,4 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('tests', 'TestController@logSpeed');
+Route::group(['prefix' => '/v1', 'middleware' => 'auth:api'], function(){
+    Route::post('/tests', 'TestController@logSpeed');
+});
