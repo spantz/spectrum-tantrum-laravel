@@ -23,6 +23,8 @@ class TestController extends Controller
      */
     public function logSpeed(ModelFactory $factory, Request $request)
     {
+        //TODO: validate API credentials
+
         $this->validate($request, [
             'speed.up' => 'required',
             'speed.down' => 'required',

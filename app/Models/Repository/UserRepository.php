@@ -39,7 +39,7 @@ class UserRepository extends ModelRepository
      */
     public function userWithTokenExists($token): bool {
         return $this->query()
-            ->where('api_token', '=', $token)
+            ->where('token', '=', $token)
             ->exists();
     }
 }
