@@ -12,17 +12,8 @@ use App\Http\Controllers\Controller;
 
 class PingController extends Controller
 {
-    public function verifyToken($authToken)
+    public function verifyToken()
     {
-        $deviceExists = \DB::table('devices')
-            ->where('auth_token', '=', $authToken)
-            ->exists();
-
-        if ($deviceExists) {
-           return response()->json('Device is successfully authenticated', 200);
-        }
-        else {
-            return response()->json('Device not authenticated', 200);
-        }
+        return response()->json(['message' => 'Success']);
     }
 }
