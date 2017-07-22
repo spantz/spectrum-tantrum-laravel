@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    private $activeDevice;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,4 +31,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getActiveDevice(): Device
+    {
+        return $this->activeDevice;
+    }
+
+    public function setActiveDevice(Device $device): void
+    {
+        $this->activeDevice = $device;
+    }
+
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 }
