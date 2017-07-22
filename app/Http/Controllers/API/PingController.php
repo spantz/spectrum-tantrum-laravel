@@ -8,7 +8,9 @@
 
 namespace App\Http\Controllers\API;
 
-class PingController
+use App\Http\Controllers\Controller;
+
+class PingController extends Controller
 {
     public function verifyToken($authToken)
     {
