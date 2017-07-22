@@ -4,10 +4,10 @@
 namespace App\Services;
 
 
+use App\Models\Data\AggregateConstants;
 use App\Models\Data\TimestampAggregate;
 use App\Models\Data\UserAggregate;
 use App\Models\Repository\TestRepository;
-use App\Models\Test;
 use App\Models\User;
 
 class AggregateService
@@ -30,21 +30,21 @@ class AggregateService
         return $this->repository;
     }
 
-    public function getIndividualUserAggregates(User $user, $duration = 7, $unit = Test::DURATION_DAYS): UserAggregate
+    public function getIndividualUserAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS): UserAggregate
     {
         $durationInDays = $this->convertDurationToDays($duration, $unit);
         $raw = $this->getRepository()->getAggregatesForUsers(collect([$user]), $durationInDays);
         return $this->createUserAggregate($raw->first());
     }
 
-    public function getGlobalUserAggregates($duration = 7, $unit = Test::DURATION_DAYS): UserAggregate
+    public function getGlobalUserAggregates($duration = 7, $unit = AggregateConstants::DURATION_DAYS): UserAggregate
     {
         $durationInDays = $this->convertDurationToDays($duration, $unit);
         $raw = $this->getRepository()->getAggregatesForUsers(null, $durationInDays);
         return $this->createUserAggregate($raw->first());
     }
 
-    public function getDashboardAggregates(User $user, $duration = 7, $unit = Test::DURATION_DAYS)
+    public function getDashboardAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS)
     {
         $globalAggregates = $this->getGlobalUserAggregates($duration, $unit);
         $userAggregates = $this->getIndividualUserAggregates($user, $duration, $unit);
@@ -55,7 +55,7 @@ class AggregateService
         ]);
     }
 
-    public function getTimestampedAggregates(User $user, $duration = 7, $unit = Test::DURATION_DAYS, $roundDuration = 300)
+    public function getTimestampedAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS, $roundDuration = 300)
     {
         $results = $this->getRepository()->getAggregatesByTimestamp(
             $user,
@@ -81,13 +81,13 @@ class AggregateService
     protected function convertDurationToDays($duration, $unit): float
     {
         switch ($unit) {
-            case Test::DURATION_YEARS:
+            case AggregateConstants::DURATION_YEARS:
                 $conversionRate = 365;
                 break;
-            case Test::DURATION_WEEKS:
+            case AggregateConstants::DURATION_WEEKS:
                 $conversionRate = 7;
                 break;
-            case Test::DURATION_HOURS:
+            case AggregateConstants::DURATION_HOURS:
                 $conversionRate = (1/24);
                 break;
             default:
