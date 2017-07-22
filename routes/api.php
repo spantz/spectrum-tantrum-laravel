@@ -13,4 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/tests', 'TestController@logSpeed')->middleware('authenticateAPI');
+Route::group(['middleware' => 'authenticateAPI'], function(){
+    Route::post('/tests', 'TestController@logSpeed');
+    Route::post('/registerDevice', 'RegisterDeviceController@registerDevice');
+});
