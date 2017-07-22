@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 
 
 use App\Http\ViewConstants;
-use App\Models\Repository\TestRepository;
-use App\Models\Test;
+use App\Services\AggregateService;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request, TestRepository $repository)
+    public function index(Request $request, AggregateService $service)
     {
-//        dd($repository->getIndividualUserAggregates($request->user(), 7, Test::DURATION_DAYS));
-        //TODO retrieve high, average, and low aggregate (for last 7 days)
-        return view(ViewConstants::DASHBOARD);
+        return view(ViewConstants::DASHBOARD, ['aggregates' => $service->getDashboardAggregates($request->user())]);
     }
 }
