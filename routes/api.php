@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/tests', 'TestController@logSpeed');
+Route::post('/tests', 'TestController@logSpeed')->middleware('authenticateAPI');
