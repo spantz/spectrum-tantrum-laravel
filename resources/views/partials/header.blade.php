@@ -1,5 +1,5 @@
 <div class="header">
-    <h1>Spectrum Tantrum</h1>
+    <h1>ISPing</h1>
         @if (Route::has('login'))
         <div>
             @if (Auth::check())
