@@ -88,6 +88,9 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
+    //Custom validation rules
+    'valid_unit'           => 'The :attribute must be one of the accepted durations.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

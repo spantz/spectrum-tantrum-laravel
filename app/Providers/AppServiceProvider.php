@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Test;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('valid_unit', function ($attribute, $value, $parameters, $validator) {
+            return in_array($value, Test::getDurations(), true);
+        });
     }
 
     /**
