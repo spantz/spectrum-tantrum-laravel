@@ -4,6 +4,7 @@
 namespace App\Models\Repository;
 
 
+use App\Models\Data\TimestampAggregate;
 use App\Models\Data\UserAggregate;
 use App\Models\Test;
 use App\Models\User;
@@ -46,15 +47,15 @@ class TestRepository extends ModelRepository
     {
         return \DB::table('tests')
             ->select([
-                \DB::raw('AVG(`download_speed`) as `down`'),
-                \DB::raw('AVG(`upload_speed`) AS `up`'),
-                \DB::raw('FROM_UNIXTIME((UNIX_TIMESTAMP(`tests`.`created_at`) DIV ' . $roundDuration . ') * ' . $roundDuration . ') AS `timestamp`')
+                \DB::raw('AVG(`download_speed`) as `' . TimestampAggregate::COLUMN_DOWNLOAD . '`'),
+                \DB::raw('AVG(`upload_speed`) AS `' . TimestampAggregate::COLUMN_UPLOAD . '`'),
+                \DB::raw('FROM_UNIXTIME((UNIX_TIMESTAMP(`tests`.`created_at`) DIV ' . $roundDuration . ') * ' . $roundDuration . ') AS `' . TimestampAggregate::COLUMN_DATE . '`')
             ])
             ->from('tests')
             ->join('devices', 'tests.device_id', '=', 'devices.id')
             ->where('devices.user_id', '=', $user->id)
             ->where('tests.created_at', '>', \DB::raw('DATE_SUB(DATE_FORMAT(NOW(),"%Y-%m-%d 23:59:59"), INTERVAL ' . $durationInDays . ' DAY)'))
-            ->groupBy('devices.user_id', 'timestamp')
+            ->groupBy('devices.user_id', TimestampAggregate::COLUMN_DATE)
             ->get();
     }
 

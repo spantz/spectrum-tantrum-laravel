@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Device;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,14 +21,17 @@ class AuthenticateAPI
             return response('No auth token detected. Access forbidden.', 403);
         }
         else {
-            $device = \DB::table('devices')
+            /** @var Device $device */
+            $device = Device::with('user')
                 ->where('auth_token', '=', $request->auth_token)
                 ->first();
 
             if(!$device) {
                 return response('Invalid auth token. Access forbidden.', 403);
             } else {
-                Auth::loginUsingId($device->user_id);
+                $user = $device->user;
+                $user->setActiveDevice($device);
+                Auth::login($user);
                 return $next($request);
             }
         }

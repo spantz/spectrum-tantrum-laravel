@@ -6,9 +6,11 @@ namespace App\Services;
 
 use App\Models\Data\AggregateConstants;
 use App\Models\Data\TimestampAggregate;
+use App\Models\Data\TimestampAggregateResult;
 use App\Models\Data\UserAggregate;
 use App\Models\Repository\TestRepository;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 class AggregateService
 {
@@ -55,17 +57,25 @@ class AggregateService
         ]);
     }
 
-    public function getTimestampedAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS, $roundDuration = 300)
+    public function getTimestampedAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS, $roundDuration = 300): TimestampAggregateResult
     {
-        $results = $this->getRepository()->getAggregatesByTimestamp(
+        $raw = $this->getRepository()->getAggregatesByTimestamp(
             $user,
             $this->convertDurationToDays($duration, $unit),
             $roundDuration
         );
 
-        return $results->map(function ($result) {
-            return $this->createTimestampAggregate($result);
+        $dates = collect();
+        $down = collect();
+        $up = collect();
+        $raw->each(function ($result) use ($dates, $down, $up) {
+            $aggregate = $this->createTimestampAggregate($result);
+            $dates->push($aggregate->getDate());
+            $down->push($aggregate->getDownload());
+            $up->push($aggregate->getUpload());
         });
+
+        return new TimestampAggregateResult($dates, $down, $up);
     }
 
     protected function createUserAggregate(\stdClass $result): UserAggregate

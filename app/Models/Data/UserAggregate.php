@@ -63,7 +63,7 @@ class UserAggregate implements Jsonable, \JsonSerializable, Arrayable
      */
     function jsonSerialize()
     {
-        return $this->toJson();
+        return $this->toArray();
     }
 
     /**
