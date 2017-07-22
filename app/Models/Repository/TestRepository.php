@@ -41,13 +41,13 @@ class TestRepository extends ModelRepository
     {
         switch ($unit) {
             case Test::DURATION_YEARS:
-                $conversionRate = (1/365);
+                $conversionRate = 365;
                 break;
             case Test::DURATION_WEEKS:
-                $conversionRate = (1/7);
+                $conversionRate = 7;
                 break;
             case Test::DURATION_HOURS:
-                $conversionRate = 24;
+                $conversionRate = (1/24);
                 break;
             default:
                 $conversionRate = 1;
