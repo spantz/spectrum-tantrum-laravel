@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Data\AggregateConstants;
 use App\Models\Test;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -41,6 +42,6 @@ class DashboardRequest extends FormRequest
 
     public function getUnit(): string
     {
-        return $this->get('unit', Test::DURATION_DAYS);
+        return $this->get('unit', AggregateConstants::DURATION_DAYS);
     }
 }

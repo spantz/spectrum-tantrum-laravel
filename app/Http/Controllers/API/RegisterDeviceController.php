@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Factory\DeviceFactory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Laracore\Repository\ModelRepository;
 use Auth;
@@ -17,7 +18,7 @@ use App\Models\Device;
 
 class RegisterDeviceController
 {
-    public function registerDevice(DeviceFactory $factory, Request $request)
+    public function registerDevice(DeviceFactory $factory, Request $request, $userToken)
     {
         $remoteIP = $request->ip();
 
@@ -29,10 +30,16 @@ class RegisterDeviceController
             return response('This ip has already been used to register a device.', 400);
         }
 
+        $user = User::where('token', '=', $userToken)->first();
+
+        if (is_null($user)) {
+            return response('No user found for token.', 400);
+        }
+
         $factory->setRepository(new ModelRepository(Device::Class));
 
         $device = $factory->make([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user->id,
             'ip' => $remoteIP,
             'auth_token' => $factory->getRepository()
                 ->generateUniqueToken()

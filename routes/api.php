@@ -17,5 +17,5 @@ Route::group(['middleware' => ['authenticateAPI', 'log']], function(){
     Route::post('/tests', 'TestController@logSpeed');
 });
 
-Route::post('/registerDevice', 'RegisterDeviceController@registerDevice');
+Route::post('/registerDevice/{token}', 'RegisterDeviceController@registerDevice');
 Route::post('/ping', 'PingController@verifyToken');
