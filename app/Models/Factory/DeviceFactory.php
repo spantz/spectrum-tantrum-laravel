@@ -10,14 +10,13 @@ namespace App\Models\Factory;
 
 
 use App\Models\Repository\DeviceRepository;
-use App\Models\Repository\TestRepository;
 use Laracore\Factory\ModelFactory;
 
 class DeviceFactory extends ModelFactory
 {
     public function instantiateRepository()
     {
-        return new TestRepository();
+        return new DeviceRepository();
     }
 
     public function getRepository() : DeviceRepository
