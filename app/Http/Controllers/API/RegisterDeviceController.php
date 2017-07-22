@@ -11,8 +11,6 @@ namespace App\Http\Controllers\API;
 use App\Models\Factory\DeviceFactory;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Laracore\Repository\ModelRepository;
-use App\Models\Device;
 
 class RegisterDeviceController
 {
