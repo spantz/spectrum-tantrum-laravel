@@ -4,37 +4,64 @@
 namespace App\Models\Repository;
 
 
+use App\Models\Aggregate;
 use App\Models\Test;
 use App\Models\User;
+use Illuminate\Support\Collection;
 use Laracore\Repository\ModelRepository;
 
 class TestRepository extends ModelRepository
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultModel()
     {
         return Test::class;
     }
 
-    public function getIndividualUserAggregates(User $user, $duration, $unit)
+    public function getIndividualUserAggregates(User $user, $duration = 7, $unit = Test::DURATION_DAYS): Aggregate
+    {
+        return $this->getAggregatesForUsers(collect([$user]), $duration, $unit)->first();
+    }
+
+    public function getGlobalUserAggregates($duration = 7, $unit = Test::DURATION_DAYS): Aggregate
+    {
+        return $this->getAggregatesForUsers(null, $duration, $unit)->first();
+    }
+
+    public function getAggregatesForUsers(Collection $users = null, $duration = 7, $unit = Test::DURATION_DAYS): Collection
     {
         $durationInDays = $this->convertDurationToDays($duration, $unit);
 
-        $results = \DB::table('tests')
+        $query = \DB::table('tests')
             ->select([
-                \DB::raw('max(`download_speed`) as `max`'),
-                \DB::raw('min(`download_speed`) as `min`'),
-                \DB::raw('avg(`download_speed`) as `average`'),
+                \DB::raw('max(`download_speed`) as `' . Aggregate::COLUMN_MAX . '`'),
+                \DB::raw('min(`download_speed`) as `' . Aggregate::COLUMN_MIN . '`'),
+                \DB::raw('avg(`download_speed`) as `' . Aggregate::COLUMN_AVERAGE . '`'),
             ])
             ->from('tests')
             ->join('devices', 'tests.device_id', '=', 'devices.id')
-            ->join('users', 'devices.user_id', '=', 'users.id')
-            ->where('users.id', '=', $user->id)
+            ->join('users', 'devices.user_id', '=', 'users.id');
+
+        if ($users != null) {
+            $query->whereIn('users.id', $users->pluck('id'));
+        }
+
+        $results = $query
             ->where('tests.created_at', '>', \DB::raw('DATE_SUB(DATE_FORMAT(NOW(),"%Y-%m-%d 23:59:59"), INTERVAL ' . $durationInDays . ' DAY)'))
             ->groupBy('devices.id')
             ->get();
 
-        //TODO remove use of DB::raw
-        return $results;
+        return $results
+            ->map(function ($result) {
+                return $this->wrapAggregateResultInModel($result);
+            });
+    }
+
+    protected function wrapAggregateResultInModel(\stdClass $result): Aggregate
+    {
+        return new Aggregate($result);
     }
 
     protected function convertDurationToDays($duration, $unit): float
