@@ -6,7 +6,7 @@
  * Time: 10:10 PM
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Factory\DeviceFactory;
 use App\Models\User;
@@ -35,8 +35,6 @@ class RegisterDeviceController
             return response('No user found for token.', 400);
         }
 
-        $factory->setRepository(new ModelRepository(Device::Class));
-
         $device = $factory->make([
             'user_id' => $user->id,
             'ip' => $remoteIP,
@@ -44,6 +42,9 @@ class RegisterDeviceController
                 ->generateUniqueToken()
         ]);
 
-        return response()->json($device->auth_token);
+        return response()->json([
+            'message' => 'success',
+            'token' => $device->auth_token
+        ]);
     }
 }
