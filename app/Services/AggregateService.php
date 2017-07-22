@@ -66,14 +66,16 @@ class AggregateService
         );
 
         $dates = collect();
-        $results = collect();
-        $raw->each(function ($result) use ($dates, $results) {
+        $down = collect();
+        $up = collect();
+        $raw->each(function ($result) use ($dates, $down, $up) {
             $aggregate = $this->createTimestampAggregate($result);
             $dates->push($aggregate->getDate());
-            $results->push($aggregate);
+            $down->push($aggregate->getDownload());
+            $up->push($aggregate->getUpload());
         });
 
-        return new TimestampAggregateResult($dates, $results);
+        return new TimestampAggregateResult($dates, $down, $up);
     }
 
     protected function createUserAggregate(\stdClass $result): UserAggregate

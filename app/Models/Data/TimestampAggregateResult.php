@@ -11,12 +11,14 @@ use Illuminate\Support\Collection;
 class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
 {
     private $dates;
-    private $results;
+    private $down;
+    private $up;
 
-    function __construct(Collection $dates, Collection $results)
+    function __construct(Collection $dates, Collection $down, Collection $up)
     {
         $this->dates = $dates;
-        $this->results = $results;
+        $this->down = $down;
+        $this->up = $up;
     }
 
     /**
@@ -28,7 +30,8 @@ class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
     {
         return [
             'dates' => $this->dates,
-            'results' => $this->results
+            'down' => $this->down,
+            'up' => $this->up
         ];
     }
 
