@@ -6,7 +6,7 @@
  * Time: 7:30 PM
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 
 use Illuminate\Http\Request;
