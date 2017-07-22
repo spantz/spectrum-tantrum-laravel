@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['authenticateAPI', 'log']], function(){
+Route::group(['middleware' => ['authenticateAPI', 'logAPI']], function(){
     Route::post('/tests', 'API\TestController@logSpeed');
     Route::get('/dry-run', 'API\PingController@verifyToken');
 });
