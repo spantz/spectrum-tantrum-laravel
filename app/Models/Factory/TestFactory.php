@@ -9,10 +9,18 @@
 namespace App\Models\Factory;
 
 
+use App\Models\Repository\TestRepository;
+use Laracore\Factory\ModelFactory;
+
 class TestFactory extends ModelFactory
 {
     public function instantiateRepository()
     {
         return new TestRepository();
+    }
+
+    public function getRepository(): TestRepository
+    {
+        return parent::getRepository();
     }
 }
