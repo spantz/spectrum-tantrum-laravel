@@ -1,3 +1,5 @@
+@import 'colors';
+
 html,
 body {
   padding: 0;
@@ -52,4 +54,8 @@ p {
 .button:hover {
   background: #DDD;
   transform: translateY(10px);
+}
+
+.content {
+  padding: 2rem;
 }
