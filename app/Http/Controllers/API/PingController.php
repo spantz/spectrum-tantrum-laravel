@@ -8,8 +8,6 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
-
 class PingController
 {
     public function verifyToken($authToken)
