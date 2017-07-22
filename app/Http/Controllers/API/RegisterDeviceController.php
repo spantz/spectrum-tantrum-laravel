@@ -26,13 +26,15 @@ class RegisterDeviceController
             ->exists();
 
         if ($deviceAlreadyRegistered) {
-            return response('This ip has already been used to register a device.', 400);
+            return response()->json(['message' => 'This ip has already been used to register a device.'], 400);
         }
 
         $user = User::where('token', '=', $userToken)->first();
 
         if (is_null($user)) {
-            return response('No user found for token.', 400);
+            return response()->json([
+                'message' => 'No user found for token.'
+            ], 400);
         }
 
         $device = $factory->make([
