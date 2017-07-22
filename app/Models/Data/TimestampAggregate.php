@@ -4,21 +4,24 @@
 namespace App\Models\Data;
 
 
-class TimestampAggregate
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+
+class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
 {
-    const COLUMN_DOWNLOAD = 'download';
-    const COLUMN_UPLOAD = 'upload';
+    const COLUMN_DOWNLOAD = 'down';
+    const COLUMN_UPLOAD = 'up';
     const COLUMN_DATE = 'date';
 
-    private $download;
-    private $upload;
+    private $down;
+    private $up;
     private $date;
 
     function __construct(\stdClass $rawResult)
     {
         if (!is_null($rawResult)) {
-            $this->download = $rawResult->download;
-            $this->upload = $rawResult->upload;
+            $this->down = $rawResult->down;
+            $this->up = $rawResult->up;
             $this->date = $rawResult->date;
         }
     }
@@ -28,7 +31,7 @@ class TimestampAggregate
      */
     public function getDownload()
     {
-        return $this->download;
+        return $this->down;
     }
 
     /**
@@ -36,7 +39,7 @@ class TimestampAggregate
      */
     public function getUpload()
     {
-        return $this->upload;
+        return $this->up;
     }
 
     /**
@@ -60,7 +63,7 @@ class TimestampAggregate
      */
     function jsonSerialize()
     {
-        return $this->toJson();
+        return $this->toArray();
     }
 
     /**
