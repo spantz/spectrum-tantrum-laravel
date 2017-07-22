@@ -6,20 +6,16 @@
  * Time: 12:50 PM
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 
 class PingController
 {
-    public function verifyToken(Request $request)
+    public function verifyToken($authToken)
     {
-        if (!$request->has('auth_token')) {
-            return response()->json('No token detected.', 400);
-        }
-
         $deviceExists = \DB::table('devices')
-            ->where('auth_token', '=', $request->auth_token)
+            ->where('auth_token', '=', $authToken)
             ->exists();
 
         if ($deviceExists) {
