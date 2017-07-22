@@ -8,12 +8,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Factory\DeviceFactory;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-
-class RegisterDeviceController
+class RegisterDeviceController extends Controller
 {
     public function registerDevice(DeviceFactory $factory, Request $request, $userToken)
     {

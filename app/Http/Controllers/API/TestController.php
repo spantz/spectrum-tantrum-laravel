@@ -8,16 +8,16 @@
 
 namespace App\Http\Controllers\API;
 
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use Laracore\Factory\ModelFactory;
 use Laracore\Repository\ModelRepository;
 
-
 class TestController extends Controller
 {
     /**
+     * @param ModelFactory $factory
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
