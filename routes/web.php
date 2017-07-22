@@ -27,4 +27,5 @@ Route::middleware('auth')->group(function () {
         ->name(RouteConstants::DEVICE_REGISTRATION);
 
     Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/averages', 'DashboardController@averages');
 });

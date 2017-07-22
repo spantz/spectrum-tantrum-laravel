@@ -34,7 +34,7 @@ class DashboardController extends Controller
         return view(ViewConstants::DASHBOARD, ['aggregates' => $this->getService()->getDashboardAggregates($request->user())]);
     }
 
-    public function filteredData(DashboardRequest $request)
+    public function averages(DashboardRequest $request)
     {
         return $this->getService()->getDashboardAggregates(
             $request->user(),
