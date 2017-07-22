@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Data;
 
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-class Aggregate implements Jsonable, \JsonSerializable, Arrayable
+class UserAggregate implements Jsonable, \JsonSerializable, Arrayable
 {
     const COLUMN_MAX = 'max';
     const COLUMN_MIN = 'min';
