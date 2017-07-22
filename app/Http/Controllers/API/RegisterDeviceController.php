@@ -12,7 +12,6 @@ use App\Models\Factory\DeviceFactory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laracore\Repository\ModelRepository;
-use Auth;
 use App\Models\Device;
 
 
