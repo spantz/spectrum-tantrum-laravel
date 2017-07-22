@@ -23,8 +23,6 @@ class TestController extends Controller
      */
     public function logSpeed(ModelFactory $factory, Request $request)
     {
-        //TODO: validate API credentials
-
         $this->validate($request, [
             'speed.up' => 'required',
             'speed.down' => 'required',
@@ -36,14 +34,14 @@ class TestController extends Controller
 
         $test = $factory->make([
             'device_id' => $request->device_id,
-            'download_speed' => $this->convertSpeedToKilobytes($request->input('speed.down')),
-            'upload_speed' => $this->convertSpeedToKilobytes($request->input('speed.up')),
+            'download_speed' => $this->convertMegabitsToKilobytes($request->input('speed.down')),
+            'upload_speed' => $this->convertMegabitsToKilobytes($request->input('speed.up')),
         ]);
 
         return response()->json('success');
     }
 
-    private function convertSpeedToKilobytes($speed)
+    private function convertMegabitsToKilobytes($speed)
     {
         return round($speed * 125,2);
     }
