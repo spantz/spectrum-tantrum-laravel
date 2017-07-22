@@ -50,13 +50,32 @@ class TestRepository extends ModelRepository
 
         $results = $query
             ->where('tests.created_at', '>', \DB::raw('DATE_SUB(DATE_FORMAT(NOW(),"%Y-%m-%d 23:59:59"), INTERVAL ' . $durationInDays . ' DAY)'))
-            ->groupBy('devices.id')
+            ->groupBy('devices.user_id')
             ->get();
 
         return $results
             ->map(function ($result) {
                 return $this->wrapAggregateResultInModel($result);
             });
+    }
+
+    public function getAggregatesByTimestamp(User $user, $duration = 7, $unit = Test::DURATION_DAYS, $roundDuration = 300)
+    {
+        $durationInDays = $this->convertDurationToDays($duration, $unit);
+
+        //TODO convert to objects
+        return \DB::table('tests')
+            ->select([
+                \DB::raw('AVG(`download_speed`) as `down`'),
+                \DB::raw('AVG(`upload_speed`) AS `up`'),
+                \DB::raw('FROM_UNIXTIME((UNIX_TIMESTAMP(`tests`.`created_at`) DIV ' . $roundDuration . ') * ' . $roundDuration . ') AS `timestamp`')
+            ])
+            ->from('tests')
+            ->join('devices', 'tests.device_id', '=', 'devices.id')
+            ->where('devices.user_id', '=', $user->id)
+            ->where('tests.created_at', '>', \DB::raw('DATE_SUB(DATE_FORMAT(NOW(),"%Y-%m-%d 23:59:59"), INTERVAL ' . $durationInDays . ' DAY)'))
+            ->groupBy('devices.user_id', 'timestamp')
+            ->get();
     }
 
     protected function wrapAggregateResultInModel(\stdClass $result): Aggregate

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Test;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -28,18 +29,18 @@ class DashboardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'duration' => 'required|integer',
-            'unit' => 'required|valid_unit'
+            'duration' => 'integer',
+            'unit' => 'valid_unit'
         ];
     }
 
     public function getDuration(): int
     {
-        return $this->duration;
+        return $this->get('duration', 7);
     }
 
     public function getUnit(): string
     {
-        return $this->unit;
+        return $this->get('unit', Test::DURATION_DAYS);
     }
 }

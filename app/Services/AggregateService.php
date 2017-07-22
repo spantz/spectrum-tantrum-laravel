@@ -28,4 +28,9 @@ class AggregateService
         ]);
     }
 
+    public function getTimestampedAggregates(User $user, $duration = 7, $unit = Test::DURATION_DAYS, $roundDuration = 300)
+    {
+        return $this->repository->getAggregatesByTimestamp($user, $duration, $unit, $roundDuration);
+    }
+
 }

@@ -42,4 +42,29 @@ class DashboardController extends Controller
             $request->getUnit()
         );
     }
+
+    public function timestampedAggregates(DashboardRequest $request, $timeFrame = 'fiveMinutes')
+    {
+        switch ($timeFrame) {
+            case 'fiveMinutes':
+                $duration = 300;
+                break;
+            case 'fifteenMinutes':
+                $duration = (300 * 3);
+                break;
+            case 'hours':
+                $duration = 3600;
+                break;
+            default:
+                // Days
+                $duration = (3600 * 24);
+                break;
+        }
+
+        return $this->getService()->getTimestampedAggregates(
+            $request->user(),
+            $request->getDuration(),
+            $request->getUnit(), $duration
+        );
+    }
 }
