@@ -22,4 +22,30 @@ class DeviceRepository extends ModelRepository
             ->exists();
     }
 
+    /**
+     * Generates a unique token and returns it.
+     *
+     * @return string
+     */
+    public function generateUniqueToken(): string
+    {
+        do {
+            $token = str_random(48);
+        } while ($this->deviceWithTokenExists($token));
+
+        return $token;
+    }
+
+    /**
+     * Tests if the specified token already exists.
+     *
+     * @param $token
+     * @return bool
+     */
+    public function deviceWithTokenExists($token): bool
+    {
+        return $this->query()
+            ->where('auth_token', '=', $token)
+            ->exists();
+    }
 }

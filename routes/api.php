@@ -13,4 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/tests', 'TestController@logSpeed')->middleware('authenticateAPI');
+Route::group(['middleware' => ['authenticateAPI', 'log']], function(){
+    Route::post('/tests', 'TestController@logSpeed');
+});
+
+Route::post('/registerDevice/{token}', 'API\RegisterDeviceController@registerDevice');
+Route::get('/ping/{token}', 'API\PingController@verifyToken');

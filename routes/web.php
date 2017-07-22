@@ -28,4 +28,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/averages', 'DashboardController@averages');
+    Route::get('/timestamps/{timeFrame?}', 'DashboardController@timestampedAggregates');
 });
