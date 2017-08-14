@@ -17,7 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::auth();
+
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name(RouteConstants::LOGIN);
+Route::post('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout')->name(RouteConstants::LOGOUT);
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name(RouteConstants::REGISTER);
+Route::post('register', 'Auth\RegisterController@register');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')
