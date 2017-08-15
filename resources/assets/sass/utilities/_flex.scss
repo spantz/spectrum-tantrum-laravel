@@ -1,3 +1,16 @@
 .u-flex {
     display: flex;
+
+    &.center {
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.center-vertically {
+        align-content: center;
+    }
+
+    &.center-horizontally {
+        align-content: center;
+    }
 }

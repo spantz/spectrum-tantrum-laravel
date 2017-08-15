@@ -1,7 +1,10 @@
+@import 'settings/settings';
 @import 'objects/objects';
 @import 'utilities/utilities';
 @import 'generic/generic';
+@import 'elements/elements';
 @import 'components/components';
+
 
 .content {
   padding: 2rem;

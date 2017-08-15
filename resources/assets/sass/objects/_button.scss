@@ -17,4 +17,9 @@
   &:focus {
     outline: none
   }
+
+  &.primary {
+    background: #047DB6;
+    color: #C5FFFF;
+  }
 }

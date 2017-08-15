@@ -1,0 +1,30 @@
+.card {
+    border-radius: 4px;
+    box-shadow: 0 0 1em rgba(0,0,0,.2);
+    .header {
+        padding: 1em 2em;
+
+        .title {
+            font-size: 2rem;
+        }
+    }
+    .body {
+        padding: 2em;
+    }
+    .footer {
+        margin-top: 1em;
+        display: flex;
+        border-top: 1px rgba(0,0,0,.1) solid;
+        
+        .button {
+            margin-left: 0;
+            flex: 1;
+            border-radius: 0;
+            border-right: 1px rgba(0,0,0,.1) solid;
+
+            &:last-of-type {
+                border-right: none;
+            }
+        }
+    }
+}

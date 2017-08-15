@@ -1,8 +1,14 @@
 .header {
   background: #047DB6;
-  padding: 3em;
+  padding: 2em;
   color: #C5FFFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .title {
+    a {
+      color: #C5FFFF;
+    }
+  }
 }
