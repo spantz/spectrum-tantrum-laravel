@@ -11,5 +11,8 @@ class RouteConstants
      */
     const HOME = 'home';
     const DEVICE_REGISTRATION = 'deviceRegistration';
+    const LOGIN = 'login';
+    const LOGOUT = 'logout';
+    const REGISTER = 'register';
 
 }
