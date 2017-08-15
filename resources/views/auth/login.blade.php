@@ -27,7 +27,10 @@
                     @endif
                 </label>
                 <div class="u-flex">
-                    <h3>Remember Me</h3> <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                <label class="checkbox">
+                    <h3>Remember Me</h3>
+                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                </label>
                 </div>
             </div>
             <div class="footer">

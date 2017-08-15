@@ -1,0 +1,13 @@
+.checkbox {
+    display: flex;
+    background: rgba(0,0,0,.1);
+    align-items: center;
+    border-radius: 4px;
+    padding: .25em 1em;
+    margin-top: 2em;
+
+    input {
+        margin-left: 1em;
+        border-left: 2px black solid;
+    }
+}

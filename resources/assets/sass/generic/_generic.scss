@@ -1,5 +1,4 @@
 @import 'reset';
-
 html,
 body {
   font-family: 'Avenir Next', sans-serif;
@@ -7,7 +6,7 @@ body {
   min-height: 100vh;
 }
 
-h1, 
+h1,
 h2,
 h3,
 h4,
@@ -23,7 +22,12 @@ h1 {
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  line-height: 2;
+}
+
+h3 {
+  font-size: 1.6rem;
   line-height: 2;
 }
 
@@ -33,11 +37,11 @@ p {
 }
 
 a {
-    line-height: 1.6;
-    text-decoration: none;
-    &:visited {
-      color: initial
-    }
+  line-height: 1.6;
+  text-decoration: none;
+  &:visited {
+    color: initial
+  }
 }
 
 button {
@@ -46,20 +50,21 @@ button {
 }
 
 label {
-  line-height: 1; 
+  line-height: 1;
+  cursor: pointer;
 }
 
 input {
   font-size: 1.6em;
   padding: 1em .5em;
   min-width: 20em;
-  border: 1px rgba(0,0,0,.2) solid;
-
+  border: 1px rgba(0, 0, 0, .2) solid;
+  border-radius: 5px;
+  cursor: pointer;
   &:focus {
     outline: none;
     border: 1px black solid;
   }
-
   &[type="checkbox"] {
     background: black;
   }
