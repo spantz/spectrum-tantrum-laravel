@@ -196,6 +196,7 @@ html,
 body {
   font-family: 'Avenir Next', sans-serif;
   font-size: 10px;
+  min-height: 100vh;
 }
 
 h1,
@@ -289,11 +290,6 @@ input[type="checkbox"] {
       -ms-flex: 1;
           flex: 1;
   border-radius: 0;
-  border-right: 1px rgba(0, 0, 0, 0.1) solid;
-}
-
-.card .footer .button:last-of-type {
-  border-right: none;
 }
 
 .header {
