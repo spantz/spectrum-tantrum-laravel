@@ -1,0 +1,15 @@
+.u-padding {
+  @for $i from 1 through 10 {
+    &.#{$i} {
+      padding: #{$i}em;
+    }
+  }
+}
+
+.u-margin {
+  @for $i from 1 through 10 {
+    &.#{$i} {
+      padding: #{$i}em;
+    }
+  }
+}

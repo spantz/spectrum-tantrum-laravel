@@ -1,5 +1,5 @@
 <div class="header">
-    <h1 class="title"><a href="{{ url('/') }}">ISPing</a></h1>
+    <h2 class="title"><a href="{{ url('/') }}">ISPing</a></h2>
     @if (Route::has('login'))
         @if (Auth::check())
         <div class="u-flex">

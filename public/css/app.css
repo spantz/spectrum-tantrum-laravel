@@ -1,9 +1,9 @@
 .button {
   background: #FFFFFF;
-  border-radius: .5rem;
+  border-radius: .5em;
   font-family: 'Avenir Next', sans-serif;
-  font-size: 2rem;
-  padding: 1rem 2rem;
+  font-size: 2em;
+  padding: .5em 1em;
   margin-left: .25em;
   color: #6D6D6D;
   text-decoration: none;
@@ -71,6 +71,115 @@
 .u-flex.center-horizontally {
   -ms-flex-line-pack: center;
       align-content: center;
+}
+
+.u-flex.space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.u-flex .one-column {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.u-flex .two-column {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.u-flex .three-column {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.u-good-measure {
+  min-width: 40ch;
+  max-width: 75ch;
+}
+
+.u-padding.1 {
+  padding: 1em;
+}
+
+.u-padding.2 {
+  padding: 2em;
+}
+
+.u-padding.3 {
+  padding: 3em;
+}
+
+.u-padding.4 {
+  padding: 4em;
+}
+
+.u-padding.5 {
+  padding: 5em;
+}
+
+.u-padding.6 {
+  padding: 6em;
+}
+
+.u-padding.7 {
+  padding: 7em;
+}
+
+.u-padding.8 {
+  padding: 8em;
+}
+
+.u-padding.9 {
+  padding: 9em;
+}
+
+.u-padding.10 {
+  padding: 10em;
+}
+
+.u-margin.1 {
+  padding: 1em;
+}
+
+.u-margin.2 {
+  padding: 2em;
+}
+
+.u-margin.3 {
+  padding: 3em;
+}
+
+.u-margin.4 {
+  padding: 4em;
+}
+
+.u-margin.5 {
+  padding: 5em;
+}
+
+.u-margin.6 {
+  padding: 6em;
+}
+
+.u-margin.7 {
+  padding: 7em;
+}
+
+.u-margin.8 {
+  padding: 8em;
+}
+
+.u-margin.9 {
+  padding: 9em;
+}
+
+.u-margin.10 {
+  padding: 10em;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -234,11 +343,13 @@ h1 {
 
 h2 {
   font-size: 2rem;
+  font-weight: 700;
   line-height: 2;
 }
 
 h3 {
   font-size: 1.6rem;
+  font-weight: 700;
   line-height: 2;
 }
 
@@ -284,6 +395,13 @@ input[type="checkbox"] {
   background: black;
 }
 
+code {
+  font-family: Courier New, Courier, monospace;
+  background: gray;
+  color: white;
+  padding: .5em 1em;
+}
+
 .card {
   border-radius: 4px;
   -webkit-box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
@@ -297,6 +415,11 @@ input[type="checkbox"] {
 
 .card .header .title {
   font-size: 2rem;
+}
+
+.card .header.red {
+  background: #CF4C32;
+  color: #FFE2BB;
 }
 
 .card .body {
@@ -320,8 +443,9 @@ input[type="checkbox"] {
 }
 
 .header {
+  font-size: 1rem;
   background: #047DB6;
-  padding: 2em;
+  padding: 1em;
   color: #C5FFFF;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -332,6 +456,10 @@ input[type="checkbox"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.header .button {
+  font-size: 1.25em;
 }
 
 .header .title a {
