@@ -26394,17 +26394,7 @@ var labels = testData.dates.map(function (d) {
             data: testData.up
         }]
     };
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_chartjs_2__["Line"], {
-        data: lineData,
-        options: {
-            animation: {
-                duration: 0 // general animation time
-            },
-            hover: {
-                animationDuration: 0 // duration of animations when hovering an item
-            },
-            responsiveAnimationDuration: 0 // animation duration after a resize
-        } });
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_chartjs_2__["Line"], { data: lineData, options: { animation: { duration: 0 }, hover: {}, animationDuration: 0, responsiveAnimationDuration: 0 } });
 });
 // CONCATENATED MODULE: ./resources/assets/js/app.js
 /* harmony import */ var app___WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(33);

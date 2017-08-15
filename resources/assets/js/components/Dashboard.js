@@ -30,16 +30,6 @@ export default({data, options}) => {
         ]
     };
     return (
-        <Line
-            data={lineData}
-            options={{
-        animation: {
-            duration: 0, // general animation time
-        },
-        hover: {
-            animationDuration: 0, // duration of animations when hovering an item
-        },
-        responsiveAnimationDuration: 0, // animation duration after a resize
-    }}></Line>
+        <Line data={lineData} options={{animation: { duration: 0 }, hover: {}, animationDuration: 0,  responsiveAnimationDuration: 0}}></Line>
     )
 }
