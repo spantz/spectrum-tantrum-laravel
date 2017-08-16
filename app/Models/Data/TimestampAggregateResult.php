@@ -13,12 +13,14 @@ class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
     private $dates;
     private $down;
     private $up;
+    private $ping;
 
-    function __construct(Collection $dates, Collection $down, Collection $up)
+    function __construct(Collection $dates, Collection $down, Collection $up, Collection $ping)
     {
         $this->dates = $dates;
         $this->down = $down;
         $this->up = $up;
+        $this->ping = $ping;
     }
 
     /**
@@ -31,7 +33,8 @@ class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
         return [
             'dates' => $this->dates,
             'down' => $this->down,
-            'up' => $this->up
+            'up' => $this->up,
+            'ping' => $this->ping
         ];
     }
 
