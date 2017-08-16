@@ -79,6 +79,12 @@
           justify-content: space-between;
 }
 
+.u-flex.no-stretch {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
 .u-flex .one-column {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -102,84 +108,164 @@
   max-width: 75ch;
 }
 
-.u-padding.1 {
+.u-padding._1 {
   padding: 1em;
 }
 
-.u-padding.2 {
+.u-padding._2 {
   padding: 2em;
 }
 
-.u-padding.3 {
+.u-padding._3 {
   padding: 3em;
 }
 
-.u-padding.4 {
+.u-padding._4 {
   padding: 4em;
 }
 
-.u-padding.5 {
+.u-padding._5 {
   padding: 5em;
 }
 
-.u-padding.6 {
+.u-padding._6 {
   padding: 6em;
 }
 
-.u-padding.7 {
+.u-padding._7 {
   padding: 7em;
 }
 
-.u-padding.8 {
+.u-padding._8 {
   padding: 8em;
 }
 
-.u-padding.9 {
+.u-padding._9 {
   padding: 9em;
 }
 
-.u-padding.10 {
+.u-padding._10 {
   padding: 10em;
 }
 
-.u-margin.1 {
-  padding: 1em;
+.u-margin._1 {
+  margin: 1em;
 }
 
-.u-margin.2 {
-  padding: 2em;
+.u-margin._2 {
+  margin: 2em;
 }
 
-.u-margin.3 {
-  padding: 3em;
+.u-margin._3 {
+  margin: 3em;
 }
 
-.u-margin.4 {
-  padding: 4em;
+.u-margin._4 {
+  margin: 4em;
 }
 
-.u-margin.5 {
-  padding: 5em;
+.u-margin._5 {
+  margin: 5em;
 }
 
-.u-margin.6 {
-  padding: 6em;
+.u-margin._6 {
+  margin: 6em;
 }
 
-.u-margin.7 {
-  padding: 7em;
+.u-margin._7 {
+  margin: 7em;
 }
 
-.u-margin.8 {
-  padding: 8em;
+.u-margin._8 {
+  margin: 8em;
 }
 
-.u-margin.9 {
-  padding: 9em;
+.u-margin._9 {
+  margin: 9em;
 }
 
-.u-margin.10 {
-  padding: 10em;
+.u-margin._10 {
+  margin: 10em;
+}
+
+.u-margin-left._1 {
+  margin-left: 1em;
+}
+
+.u-margin-left._2 {
+  margin-left: 2em;
+}
+
+.u-margin-left._3 {
+  margin-left: 3em;
+}
+
+.u-margin-left._4 {
+  margin-left: 4em;
+}
+
+.u-margin-left._5 {
+  margin-left: 5em;
+}
+
+.u-margin-left._6 {
+  margin-left: 6em;
+}
+
+.u-margin-left._7 {
+  margin-left: 7em;
+}
+
+.u-margin-left._8 {
+  margin-left: 8em;
+}
+
+.u-margin-left._9 {
+  margin-left: 9em;
+}
+
+.u-margin-left._10 {
+  margin-left: 10em;
+}
+
+.u-margin-right._1 {
+  margin-right: 1em;
+}
+
+.u-margin-right._2 {
+  margin-right: 2em;
+}
+
+.u-margin-right._3 {
+  margin-right: 3em;
+}
+
+.u-margin-right._4 {
+  margin-right: 4em;
+}
+
+.u-margin-right._5 {
+  margin-right: 5em;
+}
+
+.u-margin-right._6 {
+  margin-right: 6em;
+}
+
+.u-margin-right._7 {
+  margin-right: 7em;
+}
+
+.u-margin-right._8 {
+  margin-right: 8em;
+}
+
+.u-margin-right._9 {
+  margin-right: 9em;
+}
+
+.u-margin-right._10 {
+  margin-right: 10em;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -400,6 +486,7 @@ code {
   background: gray;
   color: white;
   padding: .5em 1em;
+  line-height: 2.4;
 }
 
 .card {

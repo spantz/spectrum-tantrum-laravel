@@ -18,6 +18,10 @@
         justify-content: space-between;
     }
 
+    &.no-stretch {
+        align-items: flex-start;
+    }
+
     .one-column {
         flex: 1;
     }
