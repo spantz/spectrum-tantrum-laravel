@@ -36,8 +36,8 @@ class TestController extends Controller
 
         /** @var User $user */
         $user = $request->user();
-        $test = $factory->make([
-            'device_id' => $user->getActiveDevice()->id,
+        $factory->make([
+            'device_id' => $user->getActiveDeviceId(),
             'download_speed' => $this->convertMegabitsToKilobytes($request->input('speed.down')),
             'upload_speed' => $this->convertMegabitsToKilobytes($request->input('speed.up')),
             'ping' => $request->input('ping'),
