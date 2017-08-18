@@ -37,6 +37,14 @@ class User extends Authenticatable
         return $this->activeDevice;
     }
 
+    public function hasActiveDevice(): bool {
+        return !(is_null($this->getActiveDevice()));
+    }
+
+    public function getActiveDeviceId(): int {
+        return $this->hasActiveDevice() ? $this->getActiveDevice()->id : null;
+    }
+
     public function setActiveDevice(Device $device): void
     {
         $this->activeDevice = $device;
