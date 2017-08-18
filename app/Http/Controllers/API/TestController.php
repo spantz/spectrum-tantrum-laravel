@@ -27,6 +27,7 @@ class TestController extends Controller
         $this->validate($request, [
             'speed.up' => 'required',
             'speed.down' => 'required',
+            'ping' => 'required',
             'timestamp.start' => 'required',
             'timestamp.end' => 'required',
         ]);
@@ -39,6 +40,7 @@ class TestController extends Controller
             'device_id' => $user->getActiveDevice()->id,
             'download_speed' => $this->convertMegabitsToKilobytes($request->input('speed.down')),
             'upload_speed' => $this->convertMegabitsToKilobytes($request->input('speed.up')),
+            'ping' => $request->input('ping'),
         ]);
 
         return response()->json('success');

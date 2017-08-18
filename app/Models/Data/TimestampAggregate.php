@@ -12,10 +12,12 @@ class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
     const COLUMN_DOWNLOAD = 'down';
     const COLUMN_UPLOAD = 'up';
     const COLUMN_DATE = 'date';
+    const COLUMN_PING = 'ping';
 
     private $down;
     private $up;
     private $date;
+    private $ping;
 
     function __construct(\stdClass $rawResult)
     {
@@ -23,6 +25,7 @@ class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
             $this->down = $rawResult->down;
             $this->up = $rawResult->up;
             $this->date = $rawResult->date;
+            $this->ping = $rawResult->ping;
         }
     }
 
@@ -51,6 +54,14 @@ class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
     }
 
     /**
+     * @return float
+     */
+    public function getPing()
+    {
+        return $this->ping;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toJson($options = 0)
@@ -74,7 +85,8 @@ class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
         return [
             static::COLUMN_DOWNLOAD => $this->getDownload(),
             static::COLUMN_UPLOAD => $this->getUpload(),
-            static::COLUMN_DATE => $this->getDate()
+            static::COLUMN_DATE => $this->getDate(),
+            static::COLUMN_PING => $this->getPing()
         ];
     }
 

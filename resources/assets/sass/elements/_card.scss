@@ -5,9 +5,14 @@
     
     .header {
         padding: 1em 2em;
-
+        
         .title {
             font-size: 2rem;
+        }
+
+        &.red {
+            background: map-get($red, 4);
+            color: #FFE2BB;
         }
     }
     .body {

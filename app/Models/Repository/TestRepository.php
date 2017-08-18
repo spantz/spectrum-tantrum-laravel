@@ -49,6 +49,7 @@ class TestRepository extends ModelRepository
             ->select([
                 \DB::raw('AVG(`download_speed`) as `' . TimestampAggregate::COLUMN_DOWNLOAD . '`'),
                 \DB::raw('AVG(`upload_speed`) AS `' . TimestampAggregate::COLUMN_UPLOAD . '`'),
+                \DB::raw('AVG(`ping`) AS `' . TimestampAggregate::COLUMN_PING . '`'),
                 \DB::raw('FROM_UNIXTIME((UNIX_TIMESTAMP(`tests`.`created_at`) DIV ' . $roundDuration . ') * ' . $roundDuration . ') AS `' . TimestampAggregate::COLUMN_DATE . '`')
             ])
             ->from('tests')

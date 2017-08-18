@@ -13,4 +13,23 @@
     &.center-horizontally {
         align-content: center;
     }
+
+    &.space-between {
+        justify-content: space-between;
+    }
+
+    &.no-stretch {
+        align-items: flex-start;
+    }
+
+    .one-column {
+        flex: 1;
+    }
+
+    .two-column {
+        flex: 2;
+    }
+    .three-column {
+        flex: 3;
+    }
 }

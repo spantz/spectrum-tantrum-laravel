@@ -1,9 +1,9 @@
 .button {
   background: #FFFFFF;
-  border-radius: .5rem;
+  border-radius: .5em;
   font-family: 'Avenir Next', sans-serif;
-  font-size: 2rem;
-  padding: 1rem 2rem;
+  font-size: 2em;
+  padding: .5em 1em;
   margin-left: .25em;
   color: #6D6D6D;
   text-decoration: none;
@@ -71,6 +71,201 @@
 .u-flex.center-horizontally {
   -ms-flex-line-pack: center;
       align-content: center;
+}
+
+.u-flex.space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.u-flex.no-stretch {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.u-flex .one-column {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.u-flex .two-column {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.u-flex .three-column {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.u-good-measure {
+  min-width: 40ch;
+  max-width: 75ch;
+}
+
+.u-padding._1 {
+  padding: 1em;
+}
+
+.u-padding._2 {
+  padding: 2em;
+}
+
+.u-padding._3 {
+  padding: 3em;
+}
+
+.u-padding._4 {
+  padding: 4em;
+}
+
+.u-padding._5 {
+  padding: 5em;
+}
+
+.u-padding._6 {
+  padding: 6em;
+}
+
+.u-padding._7 {
+  padding: 7em;
+}
+
+.u-padding._8 {
+  padding: 8em;
+}
+
+.u-padding._9 {
+  padding: 9em;
+}
+
+.u-padding._10 {
+  padding: 10em;
+}
+
+.u-margin._1 {
+  margin: 1em;
+}
+
+.u-margin._2 {
+  margin: 2em;
+}
+
+.u-margin._3 {
+  margin: 3em;
+}
+
+.u-margin._4 {
+  margin: 4em;
+}
+
+.u-margin._5 {
+  margin: 5em;
+}
+
+.u-margin._6 {
+  margin: 6em;
+}
+
+.u-margin._7 {
+  margin: 7em;
+}
+
+.u-margin._8 {
+  margin: 8em;
+}
+
+.u-margin._9 {
+  margin: 9em;
+}
+
+.u-margin._10 {
+  margin: 10em;
+}
+
+.u-margin-left._1 {
+  margin-left: 1em;
+}
+
+.u-margin-left._2 {
+  margin-left: 2em;
+}
+
+.u-margin-left._3 {
+  margin-left: 3em;
+}
+
+.u-margin-left._4 {
+  margin-left: 4em;
+}
+
+.u-margin-left._5 {
+  margin-left: 5em;
+}
+
+.u-margin-left._6 {
+  margin-left: 6em;
+}
+
+.u-margin-left._7 {
+  margin-left: 7em;
+}
+
+.u-margin-left._8 {
+  margin-left: 8em;
+}
+
+.u-margin-left._9 {
+  margin-left: 9em;
+}
+
+.u-margin-left._10 {
+  margin-left: 10em;
+}
+
+.u-margin-right._1 {
+  margin-right: 1em;
+}
+
+.u-margin-right._2 {
+  margin-right: 2em;
+}
+
+.u-margin-right._3 {
+  margin-right: 3em;
+}
+
+.u-margin-right._4 {
+  margin-right: 4em;
+}
+
+.u-margin-right._5 {
+  margin-right: 5em;
+}
+
+.u-margin-right._6 {
+  margin-right: 6em;
+}
+
+.u-margin-right._7 {
+  margin-right: 7em;
+}
+
+.u-margin-right._8 {
+  margin-right: 8em;
+}
+
+.u-margin-right._9 {
+  margin-right: 9em;
+}
+
+.u-margin-right._10 {
+  margin-right: 10em;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -234,11 +429,13 @@ h1 {
 
 h2 {
   font-size: 2rem;
+  font-weight: 700;
   line-height: 2;
 }
 
 h3 {
   font-size: 1.6rem;
+  font-weight: 700;
   line-height: 2;
 }
 
@@ -284,6 +481,14 @@ input[type="checkbox"] {
   background: black;
 }
 
+code {
+  font-family: Courier New, Courier, monospace;
+  background: gray;
+  color: white;
+  padding: .5em 1em;
+  line-height: 2.4;
+}
+
 .card {
   border-radius: 4px;
   -webkit-box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
@@ -297,6 +502,11 @@ input[type="checkbox"] {
 
 .card .header .title {
   font-size: 2rem;
+}
+
+.card .header.red {
+  background: #CF4C32;
+  color: #FFE2BB;
 }
 
 .card .body {
@@ -320,8 +530,9 @@ input[type="checkbox"] {
 }
 
 .header {
+  font-size: 1rem;
   background: #047DB6;
-  padding: 2em;
+  padding: 1em;
   color: #C5FFFF;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -332,6 +543,10 @@ input[type="checkbox"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.header .button {
+  font-size: 1.25em;
 }
 
 .header .title a {

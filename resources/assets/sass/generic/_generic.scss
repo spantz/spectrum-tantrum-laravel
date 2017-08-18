@@ -23,11 +23,13 @@ h1 {
 
 h2 {
   font-size: 2rem;
+  font-weight: 700;
   line-height: 2;
 }
 
 h3 {
   font-size: 1.6rem;
+  font-weight: 700;
   line-height: 2;
 }
 
@@ -68,4 +70,12 @@ input {
   &[type="checkbox"] {
     background: black;
   }
+}
+
+code {
+  font-family: Courier New, Courier, monospace;
+  background: gray;
+  color: white;
+  padding: .5em 1em;
+  line-height: 2.4;
 }

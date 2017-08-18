@@ -1,0 +1,31 @@
+.u-padding {
+  @for $i from 1 through 10 {
+    &._#{$i} {
+      padding: #{$i}em;
+    }
+  }
+}
+
+.u-margin {
+  @for $i from 1 through 10 {
+    &._#{$i} {
+      margin: #{$i}em;
+    }
+  }
+}
+
+.u-margin-left {
+  @for $i from 1 through 10 {
+    &._#{$i} {
+      margin-left: #{$i}em;
+    }
+  }
+}
+
+.u-margin-right {
+  @for $i from 1 through 10 {
+    &._#{$i} {
+      margin-right: #{$i}em;
+    }
+  }
+}
