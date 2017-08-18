@@ -11,6 +11,17 @@ use Laracore\Repository\ModelRepository;
 class LogAPI
 {
     /**
+     * @var ModelFactory
+     */
+    private $factory;
+
+    public function __construct(ModelFactory $factory)
+    {
+        $factory->setRepository(new ModelRepository(Log::class));
+        $this->factory = $factory;
+    }
+
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -21,16 +32,14 @@ class LogAPI
     {
         $response =  $next($request);
 
-        $factory = new ModelFactory(Log::class);
-        $factory->setRepository(new ModelRepository(Log::class));
-
         /** @var User $user */
         $user = $request->user();
-
-        $factory->make([
-            'device_id' => $user->getActiveDevice()->id,
-            'endpoint' => $request->fullUrl(),
-        ]);
+        if (!is_null($user) && $user->hasActiveDevice()) {
+            $this->factory->make([
+                'device_id' => $user->getActiveDeviceId(),
+                'endpoint' => $request->path(),
+            ]);
+        }
 
         return $response;
     }
