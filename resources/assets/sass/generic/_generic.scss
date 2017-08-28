@@ -74,8 +74,10 @@ input {
 
 code {
   font-family: Courier New, Courier, monospace;
-  background: gray;
+  background: black;
   color: white;
   padding: .5em 1em;
   line-height: 2.4;
+  display: block;
+  overflow: auto;
 }

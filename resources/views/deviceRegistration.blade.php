@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+
+@section('scripts')
+    <script src="{{ asset('js/pages/DeviceRegistration.js') }}"></script>
+@endsection
+
 @section('content')
 <div class="setup-instructions u-flex space-between no-stretch">
     <div class="card u-good-measure two-column u-margin-right _5">
@@ -13,6 +18,8 @@
                 We'd reccomend something like a Raspberry Pi, but as long as you can
                 meet the minimum requirements, you should be good!
             </p>
+
+            <div id="clipboard"></div>
         </div>
 
     </div>

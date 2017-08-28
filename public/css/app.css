@@ -48,6 +48,21 @@
   border-left: 2px black solid;
 }
 
+.clipboard {
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.clipboard:after {
+  position: absolute;
+  right: 0;
+  top: 45%;
+  bottom: 0;
+  font-size: 1.2em;
+  content: 'Copy';
+}
+
 .u-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -483,10 +498,12 @@ input[type="checkbox"] {
 
 code {
   font-family: Courier New, Courier, monospace;
-  background: gray;
+  background: black;
   color: white;
   padding: .5em 1em;
   line-height: 2.4;
+  display: block;
+  overflow: auto;
 }
 
 .card {

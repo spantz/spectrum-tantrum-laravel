@@ -1,4 +1,6 @@
 {
+    "/js/pages/Dashboard.js": "/js/pages/Dashboard.js",
+    "/js/pages/DeviceRegistration.js": "/js/pages/DeviceRegistration.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css"
 }

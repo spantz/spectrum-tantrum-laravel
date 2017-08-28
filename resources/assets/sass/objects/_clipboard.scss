@@ -1,0 +1,13 @@
+.clipboard {
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    &:after {
+        position: absolute;
+        right: 0;
+        top: 45%;
+        bottom: 0;
+        font-size: 1.2em;
+        content: 'Copy';
+    }
+}

@@ -1316,6 +1316,10 @@ cli-usage@^0.1.1:
     marked "^0.3.6"
     marked-terminal "^1.6.2"
 
+clipboard-js:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/clipboard-js/-/clipboard-js-0.3.5.tgz#df3f8c67f45b3109d4352467232b0de03918b221"
+
 cliui@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-2.1.0.tgz#4b475760ff80264c762c3a1719032e91c7fea0d1"
