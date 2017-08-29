@@ -43,9 +43,9 @@ class TestRepository extends ModelRepository
             ->get();
     }
 
-    public function getAggregatesByTimestamp(User $user, $durationInDays = 7, $roundDuration = 300)
+    public function getAggregatesByTimestamp(User $user = null, $durationInDays = 7, $roundDuration = 21600)
     {
-        return \DB::table('tests')
+        $query = \DB::table('tests')
             ->select([
                 \DB::raw('AVG(`download_speed`) as `' . TimestampAggregate::COLUMN_DOWNLOAD . '`'),
                 \DB::raw('AVG(`upload_speed`) AS `' . TimestampAggregate::COLUMN_UPLOAD . '`'),
@@ -53,9 +53,13 @@ class TestRepository extends ModelRepository
                 \DB::raw('FROM_UNIXTIME((UNIX_TIMESTAMP(`tests`.`created_at`) DIV ' . $roundDuration . ') * ' . $roundDuration . ') AS `' . TimestampAggregate::COLUMN_DATE . '`')
             ])
             ->from('tests')
-            ->join('devices', 'tests.device_id', '=', 'devices.id')
-            ->where('devices.user_id', '=', $user->id)
-            ->where('tests.created_at', '>', \DB::raw('DATE_SUB(DATE_FORMAT(NOW(),"%Y-%m-%d 23:59:59"), INTERVAL ' . $durationInDays . ' DAY)'))
+            ->join('devices', 'tests.device_id', '=', 'devices.id');
+
+        if (!is_null($user)) {
+            $query->where('devices.user_id', '=', $user->id);
+        }
+
+        return $query->where('tests.created_at', '>', \DB::raw('DATE_SUB(DATE_FORMAT(NOW(),"%Y-%m-%d 23:59:59"), INTERVAL ' . $durationInDays . ' DAY)'))
             ->groupBy('devices.user_id', TimestampAggregate::COLUMN_DATE)
             ->get();
     }
