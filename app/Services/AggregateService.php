@@ -77,15 +77,21 @@ class AggregateService
         $down = collect();
         $up = collect();
         $ping = collect();
-        $raw->each(function ($result) use ($dates, $down, $up, $ping) {
+        $downSD = collect();
+        $upSD = collect();
+        $pingSD = collect();
+        $raw->each(function ($result) use ($dates, $down, $up, $ping, $downSD, $upSD, $pingSD) {
             $aggregate = $this->createTimestampAggregate($result);
             $dates->push($aggregate->getDate());
             $down->push($aggregate->getDownload());
             $up->push($aggregate->getUpload());
             $ping->push($aggregate->getPing());
+            $downSD->push($aggregate->getDownSD());
+            $upSD->push($aggregate->getUpSD());
+            $pingSD->push($aggregate->getPingSD());
         });
 
-        return new TimestampAggregateResult($dates, $down, $up, $ping);
+        return new TimestampAggregateResult($dates, $down, $up, $ping, $downSD, $upSD, $pingSD);
     }
 
     protected function createUserAggregate(\stdClass $result): UserAggregate

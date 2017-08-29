@@ -12,10 +12,12 @@ class UserAggregate implements Jsonable, \JsonSerializable, Arrayable
     const COLUMN_MAX = 'max';
     const COLUMN_MIN = 'min';
     const COLUMN_AVERAGE = 'average';
+    const COLUMN_STANDARD_DEVIATION = 'standardDeviation';
 
     private $max;
     private $min;
     private $average;
+    private $standardDeviation;
 
     function __construct(\stdClass $rawResult)
     {
@@ -23,6 +25,7 @@ class UserAggregate implements Jsonable, \JsonSerializable, Arrayable
             $this->max = $rawResult->max;
             $this->min = $rawResult->min;
             $this->average = $rawResult->average;
+            $this->standardDeviation = $rawResult->standardDeviation;
         }
     }
 
@@ -51,6 +54,14 @@ class UserAggregate implements Jsonable, \JsonSerializable, Arrayable
     }
 
     /**
+     * @return mixed
+     */
+    public function getStandardDeviation()
+    {
+        return $this->standardDeviation;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toJson($options = 0)
@@ -74,7 +85,8 @@ class UserAggregate implements Jsonable, \JsonSerializable, Arrayable
         return [
             static::COLUMN_MAX => $this->getMax(),
             static::COLUMN_MIN => $this->getMin(),
-            static::COLUMN_AVERAGE => $this->getAverage()
+            static::COLUMN_AVERAGE => $this->getAverage(),
+            static::COLUMN_STANDARD_DEVIATION => $this->getStandardDeviation()
         ];
     }
 }
