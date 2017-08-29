@@ -31,7 +31,10 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        return view(ViewConstants::DASHBOARD, ['aggregates' => $this->getService()->getDashboardAggregates($request->user())]);
+        return view(ViewConstants::DASHBOARD, [
+            'aggregates' => $this->getService()->getDashboardAggregates($request->user()),
+            'data' => $this->getService()->getTimestampedUserAndGlobalAggregates($request->user())
+        ]);
     }
 
     public function averages(DashboardRequest $request)
@@ -43,7 +46,7 @@ class DashboardController extends Controller
         );
     }
 
-    public function timestampedAggregates(DashboardRequest $request, $timeFrame = 'fiveMinutes')
+    public function timestampedAggregates(DashboardRequest $request, $timeFrame = 'sixHours')
     {
         switch ($timeFrame) {
             case 'fiveMinutes':
@@ -55,16 +58,20 @@ class DashboardController extends Controller
             case 'hours':
                 $duration = 3600;
                 break;
+            case 'sixHours':
+                $duration = (3600 * 6);
+                break;
             default:
                 // Days
                 $duration = (3600 * 24);
                 break;
         }
 
-        return $this->getService()->getTimestampedAggregates(
+        return $this->getService()->getTimestampedUserAndGlobalAggregates(
             $request->user(),
             $request->getDuration(),
-            $request->getUnit(), $duration
+            $request->getUnit(),
+            $duration
         );
     }
 }

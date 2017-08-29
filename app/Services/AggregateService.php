@@ -57,7 +57,15 @@ class AggregateService
         ]);
     }
 
-    public function getTimestampedAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS, $roundDuration = 300): TimestampAggregateResult
+    public function getTimestampedUserAndGlobalAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS, $roundDuration = 21600)
+    {
+        return collect([
+            'global' => $this->getTimestampedAggregates(null, $duration, $unit, $roundDuration),
+            'user' => $this->getTimestampedAggregates($user, $duration, $unit, $roundDuration)
+        ]);
+    }
+
+    public function getTimestampedAggregates(User $user = null, $duration = 7, $unit = AggregateConstants::DURATION_DAYS, $roundDuration = 21600): TimestampAggregateResult
     {
         $raw = $this->getRepository()->getAggregatesByTimestamp(
             $user,
