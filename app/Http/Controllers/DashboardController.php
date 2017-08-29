@@ -31,10 +31,10 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        return view(ViewConstants::DASHBOARD, collect([
+        return view(ViewConstants::DASHBOARD, [
             'aggregates' => $this->getService()->getDashboardAggregates($request->user()),
             'data' => $this->getService()->getTimestampedUserAndGlobalAggregates($request->user())
-        ]));
+        ]);
     }
 
     public function averages(DashboardRequest $request)
