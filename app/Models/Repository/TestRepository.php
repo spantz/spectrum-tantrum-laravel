@@ -21,6 +21,13 @@ class TestRepository extends ModelRepository
         return Test::class;
     }
 
+    /**
+     * Retrieves aggregates for a collection of users.
+     *
+     * @param Collection|null $users
+     * @param int $durationInDays
+     * @return Collection
+     */
     public function getAggregatesForUsers(Collection $users = null, $durationInDays = 7): Collection
     {
         $query = \DB::table('tests')
@@ -44,6 +51,14 @@ class TestRepository extends ModelRepository
             ->get();
     }
 
+    /**
+     * Retrieves aggregates, broken down by durations of time.
+     *
+     * @param User|null $user
+     * @param int $durationInDays - the duration of days, counting back, that aggregates are queried for.
+     * @param int $roundDuration - the length of time the aggregates will be rounded to. I.e. every 6 hours.
+     * @return Collection
+     */
     public function getAggregatesByTimestamp(User $user = null, $durationInDays = 7, $roundDuration = 21600)
     {
         $query = \DB::table('tests')
