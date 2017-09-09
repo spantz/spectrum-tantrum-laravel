@@ -100,9 +100,9 @@ class AggregateService
         return !empty($result) ? new UserAggregate($result) : null;
     }
 
-    protected function createTimestampAggregate(\stdClass $result): TimestampAggregate
+    protected function createTimestampAggregate(\stdClass $result): ?TimestampAggregate
     {
-        return new TimestampAggregate($result);
+        return !empty($result) ? new TimestampAggregate($result) : null;
     }
 
     protected function convertDurationToDays($duration, $unit): float
