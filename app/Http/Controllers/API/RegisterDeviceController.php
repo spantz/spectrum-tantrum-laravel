@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Device;
 use App\Models\Factory\DeviceFactory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,17 +18,12 @@ class RegisterDeviceController extends Controller
 {
     public function registerDevice(DeviceFactory $factory, Request $request, $userToken)
     {
-        $remoteIP = $request->ip();
+        $repository = $factory->getRepository();
 
-        $deviceAlreadyRegistered = \DB::table('devices')
-            ->where('ip', '=', $remoteIP)
-            ->exists();
-
-        if ($deviceAlreadyRegistered) {
-            return response()->json(['message' => 'This ip has already been used to register a device.'], 400);
-        }
-
-        $user = User::where('token', '=', $userToken)->first();
+        $repository->setModel(User::class);
+        $user = $repository->query()
+            ->where('token', '=', $userToken)
+            ->first();
 
         if (is_null($user)) {
             return response()->json([
@@ -35,11 +31,17 @@ class RegisterDeviceController extends Controller
             ], 400);
         }
 
+        $repository->setModel($repository->getDefaultModel());
+        $desiredName = $request->get('name', $request->ip());
+        $name = $repository->generateUniqueDeviceName($user, $desiredName);
+
+        /** @var Device $device */
         $device = $factory->make([
-            'user_id' => $user->id,
-            'ip' => $remoteIP,
+            'name' => $name,
             'auth_token' => $factory->getRepository()
                 ->generateUniqueToken()
+        ], [
+            'user' => $user
         ]);
 
         return response()->json([
