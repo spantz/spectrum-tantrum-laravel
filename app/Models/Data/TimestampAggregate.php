@@ -7,8 +7,10 @@ namespace App\Models\Data;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
+class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeEmpty
 {
+    use ChecksNotEmpty;
+
     const COLUMN_DOWNLOAD = 'down';
     const COLUMN_UPLOAD = 'up';
     const COLUMN_DATE = 'date';
@@ -25,7 +27,7 @@ class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
     private $upSD;
     private $pingSD;
 
-    function __construct(\stdClass $rawResult)
+    function __construct(\stdClass $rawResult = null)
     {
         if (!is_null($rawResult)) {
             $this->down = $rawResult->down;
@@ -126,4 +128,13 @@ class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty(): bool
+    {
+        return empty(array_filter($this->toArray(), function ($item) {
+            return !is_null($item);
+        }));
+    }
 }

@@ -8,8 +8,10 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Collection;
 
-class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
+class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable, CanBeEmpty
 {
+    use ChecksNotEmpty;
+
     private $dates;
     private $down;
     private $up;
@@ -68,5 +70,18 @@ class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
     function jsonSerialize()
     {
         return $this->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty(): bool
+    {
+        return empty(array_filter($this->toArray(), function ($item) {
+            if ($item instanceof Collection) {
+                return $item->isNotEmpty();
+            }
+            return !is_null($item);
+        }));
     }
 }
