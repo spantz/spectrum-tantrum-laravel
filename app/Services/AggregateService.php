@@ -32,17 +32,18 @@ class AggregateService
         return $this->repository;
     }
 
-    public function getIndividualUserAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS): UserAggregate
+    public function getIndividualUserAggregates(User $user, $duration = 7, $unit = AggregateConstants::DURATION_DAYS): ?UserAggregate
     {
         $durationInDays = $this->convertDurationToDays($duration, $unit);
         $raw = $this->getRepository()->getAggregatesForUsers(collect([$user]), $durationInDays);
         return $this->createUserAggregate($raw->first());
     }
 
-    public function getGlobalUserAggregates($duration = 7, $unit = AggregateConstants::DURATION_DAYS): UserAggregate
+    public function getGlobalUserAggregates($duration = 7, $unit = AggregateConstants::DURATION_DAYS): ?UserAggregate
     {
         $durationInDays = $this->convertDurationToDays($duration, $unit);
         $raw = $this->getRepository()->getAggregatesForUsers(null, $durationInDays);
+
         return $this->createUserAggregate($raw->first());
     }
 
@@ -94,9 +95,9 @@ class AggregateService
         return new TimestampAggregateResult($dates, $down, $up, $ping, $downSD, $upSD, $pingSD);
     }
 
-    protected function createUserAggregate(\stdClass $result): UserAggregate
+    protected function createUserAggregate(\stdClass $result = null): ?UserAggregate
     {
-        return new UserAggregate($result);
+        return !empty($result) ? new UserAggregate($result) : null;
     }
 
     protected function createTimestampAggregate(\stdClass $result): TimestampAggregate
