@@ -138,26 +138,26 @@ class AggregateService
 
     /**
      * Creates a UserAggregate instance.
-     * If the object passed in is null, returns null.
+     * If the object passed in is null, returns an empty instance.
      *
      * @param \stdClass|null $result
      * @return UserAggregate|null
      */
-    protected function createUserAggregate(\stdClass $result = null): ?UserAggregate
+    protected function createUserAggregate(\stdClass $result = null): UserAggregate
     {
-        return !empty($result) ? new UserAggregate($result) : null;
+        return new UserAggregate($result);
     }
 
     /**
      * Creates a TimestampAggregate instance.
-     * If the object passed in is null, returns null.
+     * If the object passed in is null, returns an empty instance.
      *
      * @param \stdClass $result
      * @return TimestampAggregate|null
      */
-    protected function createTimestampAggregate(\stdClass $result = null): ?TimestampAggregate
+    protected function createTimestampAggregate(\stdClass $result = null): TimestampAggregate
     {
-        return !empty($result) ? new TimestampAggregate($result) : null;
+        return new TimestampAggregate($result);
     }
 
     /**
