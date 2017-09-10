@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -66,14 +67,20 @@ class RegisterController extends Controller
     {
         $factory = $this->factory;
         /** @var User $user */
+
+        $createdAt = Carbon::now();
+
         $user = $factory
             ->make([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'token' => $factory->getRepository()
-                    ->generateUniqueToken()
+                'token' => '',
+                'created_at' => $createdAt
             ]);
+
+        $user->token = $factory->getRepository()->generateUniqueToken($user->id, $user->created_at);
+        $user->save();
 
         return $user;
     }
