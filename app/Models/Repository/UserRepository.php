@@ -4,6 +4,7 @@
 namespace App\Models\Repository;
 
 
+use App\Http\TokenConstants;
 use App\Models\User;
 use Laracore\Repository\ModelRepository;
 
@@ -22,24 +23,8 @@ class UserRepository extends ModelRepository
      *
      * @return string
      */
-    public function generateUniqueToken(): string
+    public function generateUniqueToken($userId, $timestamp): string
     {
-        do {
-            $token = str_random(48);
-        } while ($this->userWithTokenExists($token));
-
-        return $token;
-    }
-
-    /**
-     * Tests if the specified token already exists.
-     *
-     * @param $token
-     * @return bool
-     */
-    public function userWithTokenExists($token): bool {
-        return $this->query()
-            ->where('token', '=', $token)
-            ->exists();
+        return encrypt('USER' . TokenConstants::DELIMITER . $userId . TokenConstants::DELIMITER . $timestamp);
     }
 }
