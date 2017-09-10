@@ -8,19 +8,27 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Collection;
 
-class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
+class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable, CanBeEmpty
 {
+    use ChecksNotEmpty;
+
     private $dates;
     private $down;
     private $up;
     private $ping;
+    private $downSD;
+    private $upSD;
+    private $pingSD;
 
-    function __construct(Collection $dates, Collection $down, Collection $up, Collection $ping)
+    function __construct(Collection $dates, Collection $down, Collection $up, Collection $ping, Collection $downSD, Collection $upSD, Collection $pingSD)
     {
         $this->dates = $dates;
         $this->down = $down;
         $this->up = $up;
         $this->ping = $ping;
+        $this->downSD = $downSD;
+        $this->upSD = $upSD;
+        $this->pingSD = $pingSD;
     }
 
     /**
@@ -34,7 +42,10 @@ class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
             'dates' => $this->dates,
             'down' => $this->down,
             'up' => $this->up,
-            'ping' => $this->ping
+            'ping' => $this->ping,
+            'downSD' => $this->downSD,
+            'upSD' => $this->upSD,
+            'pingSD' => $this->pingSD
         ];
     }
 
@@ -59,5 +70,18 @@ class TimestampAggregateResult implements \JsonSerializable, Jsonable, Arrayable
     function jsonSerialize()
     {
         return $this->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty(): bool
+    {
+        return empty(array_filter($this->toArray(), function ($item) {
+            if ($item instanceof Collection) {
+                return $item->isNotEmpty();
+            }
+            return !is_null($item);
+        }));
     }
 }

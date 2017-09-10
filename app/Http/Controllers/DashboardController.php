@@ -6,72 +6,56 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DashboardRequest;
 use App\Http\ViewConstants;
-use App\Services\AggregateService;
+use App\Services\DashboardAggregateService;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     /**
-     * @var AggregateService
+     * @var DashboardAggregateService
      */
     private $service;
 
-    function __construct(AggregateService $service)
+    function __construct(DashboardAggregateService $service)
     {
         $this->service = $service;
     }
 
     /**
-     * @return AggregateService
+     * @return DashboardAggregateService
      */
-    public function getService(): AggregateService
+    public function getService(): DashboardAggregateService
     {
         return $this->service;
     }
 
+    /**
+     * @method GET
+     * @route /dashboard
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
-        return view(ViewConstants::DASHBOARD, [
-            'aggregates' => $this->getService()->getDashboardAggregates($request->user()),
-            'data' => $this->getService()->getTimestampedUserAndGlobalAggregates($request->user())
-        ]);
+        $aggregateData = $this->getService()->getDashboardAggregates($request->user());
+        return view(ViewConstants::DASHBOARD, $aggregateData);
     }
 
-    public function averages(DashboardRequest $request)
+    /**
+     * @method GET
+     * @route /dashboard/aggregates
+     * @param DashboardRequest $request
+     * @return \Illuminate\Support\Collection
+     */
+    public function aggregates(DashboardRequest $request)
     {
-        return $this->getService()->getDashboardAggregates(
-            $request->user(),
-            $request->getDuration(),
-            $request->getUnit()
-        );
-    }
-
-    public function timestampedAggregates(DashboardRequest $request, $timeFrame = 'sixHours')
-    {
-        switch ($timeFrame) {
-            case 'fiveMinutes':
-                $duration = 300;
-                break;
-            case 'fifteenMinutes':
-                $duration = (300 * 3);
-                break;
-            case 'hours':
-                $duration = 3600;
-                break;
-            case 'sixHours':
-                $duration = (3600 * 6);
-                break;
-            default:
-                // Days
-                $duration = (3600 * 24);
-                break;
-        }
-
-        return $this->getService()->getTimestampedUserAndGlobalAggregates(
-            $request->user(),
-            $request->getDuration(),
-            $request->getUnit(),
-            $duration
-        );
+        return $this->getService()
+            ->getDashboardAggregates(
+                $request->user(),
+                $request->getDuration(),
+                $request->getDurationUnit(),
+                $request->getRoundDuration(),
+                $request->getRoundDurationUnit()
+            );
     }
 }

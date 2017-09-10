@@ -34,7 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/devices', 'HomeController@deviceRegistration')
         ->name(RouteConstants::DEVICE_REGISTRATION);
 
-    Route::get('/dashboard', 'DashboardController@index');
-    Route::get('/averages', 'DashboardController@averages');
-    Route::get('/timestamps/{timeFrame?}', 'DashboardController@timestampedAggregates');
+    Route::group(['prefix' => '/dashboard'], function () {
+        Route::get('/', 'DashboardController@index');
+        Route::get('/aggregates', 'DashboardController@aggregates');
+    });
 });
