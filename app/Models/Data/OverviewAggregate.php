@@ -7,7 +7,7 @@ namespace App\Models\Data;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-class UserAggregate implements Jsonable, \JsonSerializable, Arrayable, CanBeEmpty
+class OverviewAggregate implements Jsonable, \JsonSerializable, Arrayable, CanBeEmpty
 {
     use ChecksNotEmpty;
 

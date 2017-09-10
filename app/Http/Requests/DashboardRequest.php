@@ -31,7 +31,9 @@ class DashboardRequest extends FormRequest
     {
         return [
             'duration' => 'integer',
-            'unit' => 'valid_unit'
+            'durationUnit' => 'valid_unit',
+            'roundDuration' => 'integer',
+            'roundDurationUnit' => 'valid_unit'
         ];
     }
 
@@ -40,8 +42,19 @@ class DashboardRequest extends FormRequest
         return $this->get('duration', 7);
     }
 
-    public function getUnit(): string
+    public function getDurationUnit(): string
     {
-        return $this->get('unit', AggregateConstants::DURATION_DAYS);
+        return $this->get('durationUnit', AggregateConstants::DURATION_DAYS);
     }
+
+    public function getRoundDuration(): int
+    {
+        return $this->get('roundDuration', 6);
+    }
+
+    public function getRoundDurationUnit(): string
+    {
+        return $this->get('roundDurationUnit', AggregateConstants::DURATION_HOURS);
+    }
+
 }
