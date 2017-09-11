@@ -25,6 +25,6 @@ class UserRepository extends ModelRepository
      */
     public function generateUniqueToken($userId, $timestamp): string
     {
-        return encrypt('USER' . TokenConstants::DELIMITER . $userId . TokenConstants::DELIMITER . $timestamp);
+        return encrypt(TokenConstants::USER . TokenConstants::DELIMITER . $userId . TokenConstants::DELIMITER . $timestamp);
     }
 }

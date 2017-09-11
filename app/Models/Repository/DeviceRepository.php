@@ -32,7 +32,7 @@ class DeviceRepository extends ModelRepository
      */
     public function generateUniqueToken($deviceId, $timestamp): string
     {
-        return encrypt('DEVICE' . TokenConstants::DELIMITER . $deviceId . TokenConstants::DELIMITER . $timestamp);
+        return encrypt(TokenConstants::DEVICE . TokenConstants::DELIMITER . $deviceId . TokenConstants::DELIMITER . $timestamp);
     }
 
     /**
