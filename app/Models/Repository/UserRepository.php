@@ -21,6 +21,8 @@ class UserRepository extends ModelRepository
     /**
      * Generates a unique token and returns it.
      *
+     * @param $userId
+     * @param $timestamp
      * @return string
      */
     public function generateUniqueToken($userId, $timestamp): string
