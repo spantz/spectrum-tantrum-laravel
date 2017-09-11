@@ -13,7 +13,9 @@
                     <h2>E-mail Address</h2>
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                     @if ($errors->has('email'))
-                       
+                        <div class="error">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </div>
                     @endif
                 </label>
                 <label>
@@ -34,7 +36,7 @@
                 </div>
             </div>
             <div class="footer">
-                <button href="{{ url('register') }}" class="button">Register</button>
+                <a href="{{ url('register') }}" class="button">Register</a>
                 <button type="submit" class="button primary">Login</button>
             </div>    
         </form>      

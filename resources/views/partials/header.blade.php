@@ -4,10 +4,11 @@
         @if (Auth::check())
         <div class="u-flex">
             <a class="button" href="{{ url('/settings') }}">Settings</a>
-            <form action="{{ url('/logout') }}" method="post">
-                {{ csrf_field() }}
-                <button type="submit" class="button">Logout</button>
-            </form>
+            {{--  <form action="{{ url('/logout') }}" method="post">  --}}
+                {{--  {{ csrf_field() }}  --}}
+
+                <a href="{{ url('/logout') }}" class="button">Logout</a>
+            {{--  </form>  --}}
         </div>
         @else
             @if(Request::route()->getName() != 'login')

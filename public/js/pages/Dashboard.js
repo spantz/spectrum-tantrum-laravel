@@ -38414,7 +38414,6 @@ module.exports = __webpack_require__(306);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // CONCATENATED MODULE: ./resources/assets/js/components/Dashboard.js
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(50);
@@ -38431,31 +38430,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var testData = {
-    "dates": ["2017-07-17 00:00:00", "2017-07-17 00:05:00", "2017-07-17 01:15:00", "2017-07-17 01:50:00", "2017-07-17 02:15:00"],
-    "down": [3184, 2482, 12345, 1223, 33333],
-    "up": [3184, 2482, 12345, 1223, 33333].reverse()
-};
-
-var labels = testData.dates.map(function (d) {
-    return __WEBPACK_IMPORTED_MODULE_3_moment___default()(d).format("MMM Do h:mm a");
-});
-
 /* harmony default export */ var Dashboard_defaultExport = (function (_ref) {
     var data = _ref.data,
         options = _ref.options;
 
-    console.log(testData.down);
+
     var lineData = {
-        labels: labels,
+        labels: data.user.user.dates.map(function (d) {
+            return __WEBPACK_IMPORTED_MODULE_3_moment___default()(d).format("MMM Do h:mm a");
+        }),
         datasets: [{
             label: "Download Speed (mpbs)",
-            backgroundColor: "#047DB6",
-            data: testData.down
+            backgroundColor: "rgba(0,0,0,.6)",
+            data: data.user.user.down.map(function (speed) {
+                return speed / 1000 * 8;
+            })
         }, {
             label: "Upload Speed (mpbs)",
-            backgroundColor: "#f6b41c",
-            data: testData.up
+            backgroundColor: "rgba(0,0,0,.4)",
+            data: data.user.user.up.map(function (speed) {
+                return speed / 1000 * 8;
+            })
+        }, {
+            label: "Supposed speed",
+            backgroundColor: "rgba(255,0, 0, 1)",
+            data: [100]
         }]
     };
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_chartjs_2__["Line"], { data: lineData, options: { animation: { duration: 0 }, hover: {}, animationDuration: 0, responsiveAnimationDuration: 0 } });
@@ -38469,8 +38468,13 @@ var labels = testData.dates.map(function (d) {
 
 
 
-
-Dashboard___WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(Dashboard___WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Dashboard_defaultExport, null), document.getElementById('dashboard'));
+var aggregate = JSON.parse(document.getElementById('aggreate-data').innerText);
+var user = JSON.parse(document.getElementById('user-data').innerText);
+var data = {
+  aggregate: aggregate,
+  user: user
+};
+Dashboard___WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(Dashboard___WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Dashboard_defaultExport, { data: data }), document.getElementById('dashboard'));
 
 /***/ }),
 /* 307 */
