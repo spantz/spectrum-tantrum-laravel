@@ -38,7 +38,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $aggregateData = $this->getService()->getDashboardAggregates($request->user());
-        return view(ViewConstants::DASHBOARD, $aggregateData);
+        return view(ViewConstants::DASHBOARD, $aggregateData->all());
     }
 
     /**

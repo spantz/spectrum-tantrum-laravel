@@ -51,7 +51,7 @@ class DashboardAggregateService
         $durationUnit = AggregateConstants::DURATION_DAYS,
         $roundDuration = 6,
         $roundDurationUnit = AggregateConstants::DURATION_HOURS
-    ) {
+    ): Collection {
         $durationInDays = $this->convertDurationToDays($duration, $durationUnit);
         $roundDurationInDays = $this->convertDurationToDays($roundDuration, $roundDurationUnit);
 

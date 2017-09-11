@@ -2,10 +2,10 @@
 
 @section('scripts')
     <script id="aggreate-data" type="application/json">
-        {!! $aggregates->toJson() !!}
+        {!! $overview->toJson() !!}
     </script>
     <script id="user-data" type="application/json">
-        {!! $data->toJson() !!}
+        {!! $divided->toJson() !!}
     </script>
     <script src="{{ asset('js/pages/Dashboard.js')}}"></script>
 @endsection
