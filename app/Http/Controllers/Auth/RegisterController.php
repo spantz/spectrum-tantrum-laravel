@@ -55,6 +55,8 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'expected_speed' => 'required|integer'
+        ], [
+            'expected_speed.required' => 'Specify an expected speed in Megabits (Mb)'
         ]);
     }
 
