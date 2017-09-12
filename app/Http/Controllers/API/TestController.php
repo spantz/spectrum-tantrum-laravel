@@ -10,6 +10,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Util\ConversionUtil;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use Laracore\Factory\ModelFactory;
@@ -38,16 +39,11 @@ class TestController extends Controller
         $user = $request->user();
         $factory->make([
             'device_id' => $user->getActiveDeviceId(),
-            'download_speed' => $this->convertMegabitsToKilobytes($request->input('speed.down')),
-            'upload_speed' => $this->convertMegabitsToKilobytes($request->input('speed.up')),
+            'download_speed' => ConversionUtil::convertMegabitsToKilobytes($request->input('speed.down')),
+            'upload_speed' => ConversionUtil::convertMegabitsToKilobytes($request->input('speed.up')),
             'ping' => $request->input('ping'),
         ]);
 
         return response()->json('success');
-    }
-
-    private function convertMegabitsToKilobytes($speed)
-    {
-        return round($speed * 125,2);
     }
 }
