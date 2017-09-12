@@ -40,6 +40,15 @@
                     <h2>Confirm Password</h2>
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                 </label>
+                <label>
+                    <h2>Expected Speed (Mb)</h2>
+                    <input id="expected-speed" type="number" class="form-control" name="expected_speed" required>
+                    @if ($errors->has('expected_speed'))
+                        <span class="error">
+                            <strong>{{ $errors->first('expected_speed') }}</strong>
+                        </span>
+                    @endif
+                </label>
             </div>
             <div class="footer">
                 <button type="submit" href="{{ url('register') }}" class="button primary">Register</button>
