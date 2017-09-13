@@ -13,6 +13,7 @@ use App\Models\Device;
 use App\Models\Factory\DeviceFactory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class RegisterDeviceController extends Controller
 {
