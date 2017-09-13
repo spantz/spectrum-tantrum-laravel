@@ -4,7 +4,7 @@
 namespace App\Models\Repository;
 
 
-use App\Http\TokenConstants;
+use App\Util\TokenUtil;
 use App\Models\Device;
 use App\Models\User;
 use Laracore\Repository\ModelRepository;
@@ -32,7 +32,7 @@ class DeviceRepository extends ModelRepository
      */
     public function generateUniqueToken($deviceId, $timestamp): string
     {
-        return encrypt(TokenConstants::DEVICE . TokenConstants::DELIMITER . $deviceId . TokenConstants::DELIMITER . $timestamp);
+        return TokenUtil::encryptToken(TokenUtil::DEVICE . TokenUtil::DELIMITER . $deviceId . TokenUtil::DELIMITER . $timestamp);
     }
 
     /**

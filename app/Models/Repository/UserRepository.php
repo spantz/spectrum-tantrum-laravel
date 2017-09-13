@@ -4,7 +4,7 @@
 namespace App\Models\Repository;
 
 
-use App\Http\TokenConstants;
+use App\Util\TokenUtil;
 use App\Models\User;
 use Laracore\Repository\ModelRepository;
 
@@ -27,6 +27,6 @@ class UserRepository extends ModelRepository
      */
     public function generateUniqueToken($userId, $timestamp): string
     {
-        return encrypt(TokenConstants::USER . TokenConstants::DELIMITER . $userId . TokenConstants::DELIMITER . $timestamp);
+        return TokenUtil::encryptToken(TokenUtil::USER . TokenUtil::DELIMITER . $userId . TokenUtil::DELIMITER . $timestamp);
     }
 }
