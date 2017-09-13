@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\TokenConstants;
 use App\Models\Device;
+use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -31,24 +32,45 @@ class AuthenticateAPI
             }
 
             $explodedToken = explode(TokenConstants::DELIMITER, $decryptedToken);
-            $deviceId = $explodedToken[TokenConstants::ID_INDEX];
+
+            $tokenType = $explodedToken[TokenConstants::TYPE_INDEX];
+            $id = $explodedToken[TokenConstants::ID_INDEX];
             $timestamp = $explodedToken[TokenConstants::TIMESTAMP_INDEX];
 
-            /** @var Device $device */
-            $device = Device::with('user')
-                ->where([
-                    ['created_at', '=', $timestamp],
-                    ['id', '=', $deviceId]
-                ])
-                ->first();
+            if($tokenType === TokenConstants::DEVICE) {
+                /** @var Device $device */
+                $device = Device::with('user')
+                    ->where([
+                        ['created_at', '=', $timestamp],
+                        ['id', '=', $id]
+                    ])
+                    ->first();
 
-            if(!$device) {
-                return response('Invalid auth token. Access forbidden.', 403);
-            } else {
-                $user = $device->user;
-                $user->setActiveDevice($device);
-                Auth::login($user);
-                return $next($request);
+                if(!$device) {
+                    return response('Invalid auth token. Access forbidden.', 403);
+                } else {
+                    $user = $device->user;
+                    $user->setActiveDevice($device);
+                    Auth::login($user);
+                    return $next($request);
+                }
+            }
+            elseif($tokenType === TokenConstants::USER){
+                /** @var User $user */
+                $user = User::
+                    where([
+                        ['created_at', '=', $timestamp],
+                        ['id', '=', $id]
+                    ])
+                    ->first();
+
+                if(!$user) {
+                    return response('Invalid auth token. Access forbidden.', 403);
+                }
+                else {
+                    Auth::login($user);
+                    return $next($request);
+                }
             }
         }
     }
