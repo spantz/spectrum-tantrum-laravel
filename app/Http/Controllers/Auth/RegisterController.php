@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Util\ConversionUtil;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -70,15 +71,21 @@ class RegisterController extends Controller
     {
         $factory = $this->factory;
         /** @var User $user */
+
+        $createdAt = Carbon::now();
+
         $user = $factory
             ->make([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'token' => $factory->getRepository()
-                    ->generateUniqueToken(),
+                'token' => '',
+                'created_at' => $createdAt,
                 'expected_speed' => ConversionUtil::convertMegabitsToKilobytes($data['expected_speed'])
             ]);
+
+        $user->token = $factory->getRepository()->generateUniqueToken($user->id, $user->created_at);
+        $user->save();
 
         return $user;
     }

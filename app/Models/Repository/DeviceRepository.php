@@ -4,6 +4,7 @@
 namespace App\Models\Repository;
 
 
+use App\Util\TokenUtil;
 use App\Models\Device;
 use App\Models\User;
 use Laracore\Repository\ModelRepository;
@@ -25,28 +26,13 @@ class DeviceRepository extends ModelRepository
     /**
      * Generates a unique token and returns it.
      *
+     * @param $deviceId
+     * @param $timestamp
      * @return string
      */
-    public function generateUniqueToken(): string
+    public function generateUniqueToken($deviceId, $timestamp): string
     {
-        do {
-            $token = str_random(48);
-        } while ($this->deviceWithTokenExists($token));
-
-        return $token;
-    }
-
-    /**
-     * Tests if the specified token already exists.
-     *
-     * @param $token
-     * @return bool
-     */
-    public function deviceWithTokenExists($token): bool
-    {
-        return $this->query()
-            ->where('auth_token', '=', $token)
-            ->exists();
+        return TokenUtil::encryptToken(TokenUtil::DEVICE . TokenUtil::DELIMITER . $deviceId . TokenUtil::DELIMITER . $timestamp);
     }
 
     /**

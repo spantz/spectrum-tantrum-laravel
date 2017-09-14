@@ -13,6 +13,7 @@ use App\Models\Device;
 use App\Models\Factory\DeviceFactory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class RegisterDeviceController extends Controller
 {
@@ -35,14 +36,19 @@ class RegisterDeviceController extends Controller
         $desiredName = $request->get('name', $request->ip());
         $name = $repository->generateUniqueDeviceName($user, $desiredName);
 
+        $created_at = Carbon::now();
+
         /** @var Device $device */
         $device = $factory->make([
             'name' => $name,
-            'auth_token' => $factory->getRepository()
-                ->generateUniqueToken()
+            'auth_token' => '',
+            'created_at' => $created_at,
         ], [
             'user' => $user
         ]);
+
+        $device->auth_token = $factory->getRepository()->generateUniqueToken($device->id, $device->created_at);
+        $device->save();
 
         return response()->json([
             'message' => 'success',

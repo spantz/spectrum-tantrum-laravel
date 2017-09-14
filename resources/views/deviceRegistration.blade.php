@@ -72,7 +72,7 @@
                 meet the minimum requirements, you should be good!
             </p>
             <p>
-                <code>  {{$user->token}} </code>
+                <code> npm run register -- --token '{{$user->token}}' </code>
             </p>
         </div>
 
