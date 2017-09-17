@@ -17,9 +17,10 @@ use Carbon\Carbon;
 
 class RegisterDeviceController extends Controller
 {
-    public function registerDevice(DeviceFactory $factory, Request $request, $userToken)
+    public function registerDevice(DeviceFactory $factory, Request $request)
     {
         $repository = $factory->getRepository();
+        $userToken = $request->header('Authorization');
 
         $repository->setModel(User::class);
         $user = $repository->query()

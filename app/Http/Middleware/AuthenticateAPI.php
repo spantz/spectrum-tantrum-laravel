@@ -28,12 +28,12 @@ class AuthenticateAPI
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->has('auth_token')) {
+        if(!$request->header('Authorization')) {
             return response('No auth token detected. Access forbidden.', 403);
         }
         else {
             try {
-                $decryptedToken = TokenUtil::decryptToken($request->auth_token);
+                $decryptedToken = TokenUtil::decryptToken($request->header('Authorization'));
             }
             catch(Exception $ex) {
                 return response('Invalid auth token. Access forbidden.', 403);
