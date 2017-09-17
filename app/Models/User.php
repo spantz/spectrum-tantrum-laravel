@@ -32,7 +32,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getActiveDevice(): Device
+    public function getActiveDevice() : ?Device
     {
         return $this->activeDevice;
     }
