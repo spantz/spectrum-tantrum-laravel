@@ -33,9 +33,9 @@
                      <div class="label">Password</div>
                     <input id="password" type="password" class="form-control" name="password" required>
                      @if ($errors->has('password'))
-                        <span class="error">
+                        <div class="error">
                             <strong>{{ $errors->first('password') }}</strong>
-                        </span>
+                        </div>
                     @endif
                 </label>
                 <label>
@@ -46,9 +46,9 @@
                      <div class="label">Expected Speed (Mb)</div>
                     <input id="expected-speed" type="number" class="form-control" name="expected_speed" required>
                     @if ($errors->has('expected_speed'))
-                        <span class="error">
+                        <div class="error">
                             <strong>{{ $errors->first('expected_speed') }}</strong>
-                        </span>
+                        </div>
                     @endif
                 </label>
 
