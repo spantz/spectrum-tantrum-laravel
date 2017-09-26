@@ -11,9 +11,13 @@
             {{--  </form>  --}}
         </div>
         @else
-            @if(Request::route()->getName() != 'login')
-                <a href="{{ url('/login') }}" class="button">Login</a>
-            @endif
+        <div class="u-flex flex-end">
+
+          @if(Request::route()->getName() != 'login')
+              <a href="{{ url('/login') }}" class="button">Login</a>
+              <a href="{{ url('/register') }}" class="button">Register</a>
+          @endif
+        </div>
         @endif
     @endif
 </div>

@@ -15,8 +15,12 @@
 </head>
 <body>
     <div id="app">
-        @component('partials/header')
-        @endcomponent
+        @section('header')
+          @component('partials/header')
+          @endcomponent
+        @show
+
+        @yield('banner')
         <div class="content">
             @yield('content')
         </div>
