@@ -7,7 +7,7 @@
 
 @section('content')
 <div class="setup-instructions u-flex space-between no-stretch">
-    <div class="card u-good-measure two-column u-margin-right _5">
+    <div class="card u-good-measure two-column u-margin-right _5  slide-up delay-500">
         <div class="header red">
             <h2>Let's setup a device!</h2>
         </div>
@@ -18,12 +18,10 @@
                 We'd reccomend something like a Raspberry Pi, but as long as you can
                 meet the minimum requirements, you should be good!
             </p>
-
-            <div id="clipboard"></div>
         </div>
 
     </div>
-    <div class="card u-margin three-column">
+    <div class="card u-margin three-column  slide-up delay-1100">
         <div class="header">
             <h2>Instructions</h2>
         </div>
@@ -31,22 +29,22 @@
             <h2>Step 1</h2>
             <p>
                 <ul>
-                    <li> 
+                    <li>
                         <p>
                             <code>Node 7.0.0</code>
                         </p>
                     </li>
-                    <li> 
+                    <li>
                         <p>
                             <code>Yarn v2</code>
                         </p>
                     </li>
-                    <li> 
+                    <li>
                         <p>
                             <code>Node v7</code>
                         </p>
                     </li>
-                    <li> 
+                    <li>
                         <p>
                             <code>Node v7</code>
                         </p>
