@@ -19,7 +19,7 @@ class DeviceFactory extends ModelFactory
         return new DeviceRepository();
     }
 
-    public function getRepository() : DeviceRepository
+    public function getRepository(): DeviceRepository
     {
         return parent::getRepository();
     }

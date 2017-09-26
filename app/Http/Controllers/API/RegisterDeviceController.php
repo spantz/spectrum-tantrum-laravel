@@ -36,7 +36,6 @@ class RegisterDeviceController extends Controller
         $repository->setModel($repository->getDefaultModel());
         $desiredName = $request->get('name', $request->ip());
         $name = $repository->generateUniqueDeviceName($user, $desiredName);
-
         $created_at = Carbon::now();
 
         /** @var Device $device */
