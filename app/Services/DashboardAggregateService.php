@@ -5,7 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Data\AggregateConstants;
-use App\Models\Data\TimestampAggregate;
+use App\Models\Data\DividedAggregate;
 use App\Models\Data\TimestampAggregateResult;
 use App\Models\Data\OverviewAggregate;
 use App\Models\Repository\TestRepository;
