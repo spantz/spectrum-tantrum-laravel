@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import SpeedGraph from './SpeedGraph.js';
+import DashboardView from './DashboardView.js';
+import Overview from './Overview.js';
 import moment from 'moment';
-
 
 class Dashboard  extends Component {
 
     constructor(props, options){
       super(props, options);
-      let data = props.data;
+      let {overview, divided} = props.data;
       this.state = {
         "activeView": 'download',
-        "dates": data.user.user.dates.map(d => moment(d).format("MMM Do h:mm a")),
-        "uploads": data.user.user.up.map(speed => (speed/1000)*8 ),
-        "downloads": data.user.user.down.map(speed => (speed/1000)*8 ),
+        "overview": overview,
+        "dates": divided.dates.map(d => moment(d).format("MMM Do h:mm a")),
+        "ping": divided.ping,
+        "uploads": divided.up.map(speed => (speed/1000)*8 ),
+        "downloads": divided.down.map(speed => (speed/1000)*8 ),
         "supposedSpeed": 100
       };
 
@@ -26,9 +28,11 @@ class Dashboard  extends Component {
 
     activeView(){
       if (this.state.activeView == "download") {
-        return <SpeedGraph labels={this.state.dates} lineData={this.state.downloads} label="Downloads"/>
-      }  else {
-        return <SpeedGraph labels={this.state.dates} lineData={this.state.uploads} label="Uploads"/>
+        return (<DashboardView labels={this.state.dates} lineData={this.state.downloads} label="Downloads"/>)
+      }  else if (this.state.activeView == "upload") {
+        return (<DashboardView labels={this.state.dates} lineData={this.state.uploads} label="Uploads"/>)
+      } else {
+        return (<DashboardView labels={this.state.dates} lineData={this.state.ping} label="Ping"/>)
       }
     }
 
@@ -41,8 +45,11 @@ class Dashboard  extends Component {
               <select className="input" value={this.state.activeView} onChange={this.viewChange}>
                 <option value="download">Download</option>
                 <option value="upload">Upload</option>
+                <option value="ping">Ping</option>
+
               </select>
             </div>
+            <Overview average={this.state.overview.downloadAverage} std={this.state.overview.downloadStandardDeviation}/>
             {this.activeView()}
           </div>
       );
