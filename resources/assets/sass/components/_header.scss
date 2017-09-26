@@ -1,18 +1,20 @@
 .header {
   font-size: 1rem;
-  background: #047DB6;
+  height: 5vh;
+  background: $header-background;
   padding: 1em;
-  color: #C5FFFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-  .button {
-    font-size: 1.25em;
-  }
   .title {
+    font-size: 1.5em;
     a {
-      color: #C5FFFF;
+      transition: color 200ms ease-in-out;
+      color: white;
     }
   }
 }

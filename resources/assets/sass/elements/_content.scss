@@ -1,0 +1,9 @@
+.content {
+  margin: 2vmax;
+  border-radius: 5px;
+  &.white {
+    background: white;
+    padding: 2vmax;
+    box-shadow: 0 0 5px 0 black;
+  }
+}

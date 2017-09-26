@@ -1,0 +1,66 @@
+$efficient-bezier: cubic-bezier(0,.67,.52,.99);
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(5vmin)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0vmin)
+  }
+}
+
+.slide-up {
+  animation:  500ms $efficient-bezier 0s  slide-up;
+  animation-fill-mode: both;
+}
+
+.delay-1100 {
+  animation-delay: 1100ms;
+}
+
+.delay-1200 {
+  animation-delay: 1200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+
+.delay-1100 {
+  animation-delay: 1100ms;
+}
+
+.delay-1200 {
+  animation-delay: 1200ms;
+}
+
+.delay-1300 {
+  animation-delay: 1300ms;
+}
+
+.delay-1400 {
+  animation-delay: 1400ms;
+}
+
+.delay-1500 {
+  animation-delay: 1500ms;
+}
+
+.delay-2000 {
+  animation-delay: 2000ms;
+}
