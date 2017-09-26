@@ -7,6 +7,7 @@ namespace App\Models\Repository;
 use App\Util\TokenUtil;
 use App\Models\Device;
 use App\Models\User;
+use Carbon\Carbon;
 use Laracore\Repository\ModelRepository;
 
 class DeviceRepository extends ModelRepository
@@ -72,5 +73,21 @@ class DeviceRepository extends ModelRepository
             ->where('user_id', '=', $user->id)
             ->where('name', '=', $desiredName)
             ->exists();
+    }
+
+    /**
+     * Checks if a user has recently registered a device.
+     * Returns true or false based on the result.
+     *
+     * @param User $user - the user being checked for.
+     * @param int $minutesBackToCheck - the amount of time back to check for a new device, in minutes. Defaults to 5 minutes.
+     * @return bool - true if a device is found, false otherwise
+     */
+    public function userHasRecentlyRegisteredDevice(User $user, $minutesBackToCheck = 5)
+    {
+        return $this->query()
+        ->where('created_at', '>', Carbon::now()->subMinutes($minutesBackToCheck))
+        ->where('user_id','=', $user->id)
+        ->exists();
     }
 }
