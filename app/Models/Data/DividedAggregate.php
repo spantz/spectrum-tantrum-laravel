@@ -15,28 +15,28 @@ class DividedAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeE
     const COLUMN_UPLOAD = 'up';
     const COLUMN_DATE = 'date';
     const COLUMN_PING = 'ping';
-    const COLUMN_DOWNLOAD_SD = 'downSD';
-    const COLUMN_UPLOAD_SD = 'upSD';
-    const COLUMN_PING_SD = 'pingSD';
+    const COLUMN_DOWNLOAD_SD = 'downStandardDeviation';
+    const COLUMN_UPLOAD_SD = 'upStandardDeviation';
+    const COLUMN_PING_SD = 'pingStandardDeviation';
 
     private $down;
     private $up;
     private $date;
     private $ping;
-    private $downSD;
-    private $upSD;
-    private $pingSD;
+    private $downStandardDeviation;
+    private $upStandardDeviation;
+    private $pingStandardDeviation;
 
     function __construct(\stdClass $rawResult = null)
     {
         if (!is_null($rawResult)) {
-            $this->down = $rawResult->down;
-            $this->up = $rawResult->up;
-            $this->date = $rawResult->date;
-            $this->ping = $rawResult->ping;
-            $this->downSD = $rawResult->downSD;
-            $this->upSD = $rawResult->upSD;
-            $this->pingSD = $rawResult->pingSD;
+            $this->{static::COLUMN_DOWNLOAD} = $rawResult->{static::COLUMN_DOWNLOAD};
+            $this->{static::COLUMN_UPLOAD} = $rawResult->{static::COLUMN_UPLOAD};
+            $this->{static::COLUMN_DATE} = $rawResult->{static::COLUMN_DATE};
+            $this->{static::COLUMN_PING} = $rawResult->{static::COLUMN_PING};
+            $this->{static::COLUMN_DOWNLOAD_SD} = $rawResult->{static::COLUMN_DOWNLOAD_SD};
+            $this->{static::COLUMN_UPLOAD_SD}= $rawResult->{static::COLUMN_UPLOAD_SD};
+            $this->{static::COLUMN_PING_SD} = $rawResult->{static::COLUMN_PING_SD};
         }
     }
 
@@ -77,7 +77,7 @@ class DividedAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeE
      */
     public function getDownSD()
     {
-        return $this->downSD;
+        return $this->downStandardDeviation;
     }
 
     /**
@@ -85,7 +85,7 @@ class DividedAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeE
      */
     public function getUpSD()
     {
-        return $this->upSD;
+        return $this->upStandardDeviation;
     }
 
     /**
@@ -93,7 +93,7 @@ class DividedAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeE
      */
     public function getPingSD()
     {
-        return $this->pingSD;
+        return $this->pingStandardDeviation;
     }
 
     /**
@@ -101,7 +101,7 @@ class DividedAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeE
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->toArray(), $options);
+        return json_encode($this->jsonSerialize(), $options);
     }
 
     /**
