@@ -4,7 +4,7 @@
 namespace App\Models\Repository;
 
 
-use App\Models\Data\TimestampAggregate;
+use App\Models\Data\DividedAggregate;
 use App\Models\Data\OverviewAggregate;
 use App\Models\Test;
 use App\Models\User;
@@ -32,10 +32,12 @@ class TestRepository extends ModelRepository
     {
         $query = \DB::table('tests')
             ->select([
-                \DB::raw('ROUND(max(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_MAX . '`'),
-                \DB::raw('ROUND(min(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_MIN . '`'),
-                \DB::raw('ROUND(avg(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_AVERAGE . '`'),
-                \DB::raw('ROUND(stddev(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_STANDARD_DEVIATION . '`')
+                \DB::raw('ROUND(avg(`download_speed`), 2) as `' . OverviewAggregate::DOWNLOAD_AVG . '`'),
+                \DB::raw('ROUND(avg(`upload_speed`), 2) as `' . OverviewAggregate::UPLOAD_AVG . '`'),
+                \DB::raw('ROUND(avg(`ping`), 2) as `' . OverviewAggregate::PING_AVG . '`'),
+                \DB::raw('ROUND(stddev(`download_speed`), 2) as `' . OverviewAggregate::DOWNLOAD_STDEV . '`'),
+                \DB::raw('ROUND(stddev(`upload_speed`), 2) as `' . OverviewAggregate::UPLOAD_STDEV . '`'),
+                \DB::raw('ROUND(stddev(`ping`), 2) as `' . OverviewAggregate::PING_STDEV . '`')
             ])
             ->from('tests')
             ->join('devices', 'tests.device_id', '=', 'devices.id')
@@ -65,13 +67,13 @@ class TestRepository extends ModelRepository
 
         $query = \DB::table('tests')
             ->select([
-                \DB::raw('ROUND(AVG(`download_speed`), 2) as `' . TimestampAggregate::COLUMN_DOWNLOAD . '`'),
-                \DB::raw('ROUND(AVG(`upload_speed`), 2) AS `' . TimestampAggregate::COLUMN_UPLOAD . '`'),
-                \DB::raw('ROUND(AVG(`ping`)) AS `' . TimestampAggregate::COLUMN_PING . '`'),
-                \DB::raw('FROM_UNIXTIME((UNIX_TIMESTAMP(`tests`.`created_at`) DIV ' . $roundDurationInSeconds . ') * ' . $roundDurationInSeconds . ') AS `' . TimestampAggregate::COLUMN_DATE . '`'),
-                \DB::raw('ROUND(STDDEV(`download_speed`), 2) as `' . TimestampAggregate::COLUMN_DOWNLOAD_SD . '`'),
-                \DB::raw('ROUND(STDDEV(`upload_speed`), 2) as `' . TimestampAggregate::COLUMN_UPLOAD_SD . '`'),
-                \DB::raw('ROUND(STDDEV(`ping`)) as `' . TimestampAggregate::COLUMN_PING_SD . '`')
+                \DB::raw('ROUND(AVG(`download_speed`), 2) as `' . DividedAggregate::COLUMN_DOWNLOAD . '`'),
+                \DB::raw('ROUND(AVG(`upload_speed`), 2) AS `' . DividedAggregate::COLUMN_UPLOAD . '`'),
+                \DB::raw('ROUND(AVG(`ping`)) AS `' . DividedAggregate::COLUMN_PING . '`'),
+                \DB::raw('FROM_UNIXTIME((UNIX_TIMESTAMP(`tests`.`created_at`) DIV ' . $roundDurationInSeconds . ') * ' . $roundDurationInSeconds . ') AS `' . DividedAggregate::COLUMN_DATE . '`'),
+                \DB::raw('ROUND(STDDEV(`download_speed`), 2) as `' . DividedAggregate::COLUMN_DOWNLOAD_SD . '`'),
+                \DB::raw('ROUND(STDDEV(`upload_speed`), 2) as `' . DividedAggregate::COLUMN_UPLOAD_SD . '`'),
+                \DB::raw('ROUND(STDDEV(`ping`)) as `' . DividedAggregate::COLUMN_PING_SD . '`')
             ])
             ->from('tests')
             ->join('devices', 'tests.device_id', '=', 'devices.id');
@@ -81,7 +83,7 @@ class TestRepository extends ModelRepository
         }
         
         return $query->where('tests.created_at', '>', \DB::raw('DATE_SUB(DATE_FORMAT(NOW(),"%Y-%m-%d 23:59:59"), INTERVAL ' . $durationInDays . ' DAY)'))
-            ->groupBy('devices.user_id', TimestampAggregate::COLUMN_DATE)
+            ->groupBy('devices.user_id', DividedAggregate::COLUMN_DATE)
             ->get();
     }
 

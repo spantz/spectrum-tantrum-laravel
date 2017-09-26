@@ -28,8 +28,6 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name(Rou
 Route::post('register', 'Auth\RegisterController@register');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', 'HomeController@index')
-        ->name(RouteConstants::HOME);
 
     Route::get('/devices/register', 'HomeController@deviceRegistration')
         ->name(RouteConstants::DEVICE_REGISTRATION);
@@ -39,7 +37,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => '/dashboard'], function () {
-        Route::get('/', 'DashboardController@index');
+        Route::get('/', 'DashboardController@index')
+            ->name(RouteConstants::DASHBOARD);
         Route::get('/aggregates', 'DashboardController@aggregates');
     });
 });

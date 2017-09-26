@@ -11,56 +11,78 @@ class OverviewAggregate implements Jsonable, \JsonSerializable, Arrayable, CanBe
 {
     use ChecksNotEmpty;
 
-    const COLUMN_MAX = 'max';
-    const COLUMN_MIN = 'min';
-    const COLUMN_AVERAGE = 'average';
-    const COLUMN_STANDARD_DEVIATION = 'standardDeviation';
+    const DOWNLOAD_AVG = 'downloadAverage';
+    const UPLOAD_AVG = 'uploadAverage';
+    const PING_AVG = 'pingAverage';
+    const DOWNLOAD_STDEV = 'downloadStandardDeviation';
+    const UPLOAD_STDEV = 'uploadStandardDeviation';
+    const PING_STDEV = 'pingStandardDeviation';
 
-    private $max;
-    private $min;
-    private $average;
-    private $standardDeviation;
+    private $downloadAverage;
+    private $uploadAverage;
+    private $pingAverage;
+    private $downloadStandardDeviation;
+    private $uploadStandardDeviation;
+    private $pingStandardDeviation;
 
     function __construct(\stdClass $rawResult = null)
     {
         if (!is_null($rawResult)) {
-            $this->max = $rawResult->max;
-            $this->min = $rawResult->min;
-            $this->average = $rawResult->average;
-            $this->standardDeviation = $rawResult->standardDeviation;
+            $this->downloadAverage = $rawResult->{static::DOWNLOAD_AVG};
+            $this->uploadAverage = $rawResult->{static::UPLOAD_AVG};
+            $this->pingAverage = $rawResult->{static::PING_AVG};
+            $this->downloadStandardDeviation = $rawResult->{static::DOWNLOAD_STDEV};
+            $this->uploadStandardDeviation = $rawResult->{static::UPLOAD_STDEV};
+            $this->pingStandardDeviation = $rawResult->{static::PING_STDEV};
         }
     }
 
     /**
      * @return mixed
      */
-    public function getMax()
+    public function getDownloadAverage()
     {
-        return $this->max;
+        return $this->downloadAverage;
     }
 
     /**
      * @return mixed
      */
-    public function getMin()
+    public function getUploadAverage()
     {
-        return $this->min;
+        return $this->uploadAverage;
     }
 
     /**
      * @return mixed
      */
-    public function getAverage()
+    public function getPingAverage()
     {
-        return $this->average;
+        return $this->pingAverage;
     }
 
     /**
      * @return mixed
      */
-    public function getStandardDeviation()
+    public function getDownloadStandardDeviation()
     {
-        return $this->standardDeviation;
+        return $this->downloadStandardDeviation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUploadStandardDeviation()
+    {
+        return $this->uploadStandardDeviation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPingStandardDeviation()
+    {
+        return $this->pingStandardDeviation;
     }
 
     /**
@@ -68,7 +90,7 @@ class OverviewAggregate implements Jsonable, \JsonSerializable, Arrayable, CanBe
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->toArray(), $options);
+        return json_encode($this->jsonSerialize(), $options);
     }
 
     /**
@@ -85,10 +107,12 @@ class OverviewAggregate implements Jsonable, \JsonSerializable, Arrayable, CanBe
     public function toArray()
     {
         return [
-            static::COLUMN_MAX => $this->getMax(),
-            static::COLUMN_MIN => $this->getMin(),
-            static::COLUMN_AVERAGE => $this->getAverage(),
-            static::COLUMN_STANDARD_DEVIATION => $this->getStandardDeviation()
+            static::DOWNLOAD_AVG => $this->getDownloadAverage(),
+            static::UPLOAD_AVG => $this->getUploadAverage(),
+            static::PING_AVG => $this->getPingAverage(),
+            static::DOWNLOAD_STDEV => $this->getDownloadStandardDeviation(),
+            static::UPLOAD_STDEV => $this->getUploadStandardDeviation(),
+            static::PING_STDEV => $this->getPingStandardDeviation()
         ];
     }
 

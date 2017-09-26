@@ -5,7 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Data\AggregateConstants;
-use App\Models\Data\TimestampAggregate;
+use App\Models\Data\DividedAggregate;
 use App\Models\Data\TimestampAggregateResult;
 use App\Models\Data\OverviewAggregate;
 use App\Models\Repository\TestRepository;
@@ -56,10 +56,10 @@ class DashboardAggregateService
         $roundDurationInDays = $this->convertDurationToDays($roundDuration, $roundDurationUnit);
 
         $overview = $this->getOverviewService()
-            ->getUserAndGlobalAggregates($user, $durationInDays);
+            ->getUserOverviewAggregate($user, $durationInDays);
 
         $divided = $this->getDividedService()
-            ->getDividedUserAndGlobalAggregates($user, $durationInDays, $roundDurationInDays);
+            ->getDividedAggregate($user, $durationInDays, $roundDurationInDays);
 
         return collect([
             'overview' => $overview,

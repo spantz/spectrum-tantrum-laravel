@@ -8,28 +8,24 @@
   <div class="cards u-flex space-between">
     @component('partials/card')
       @slot('title')
-        <h3>Accountability</h3>
+        Accountability
       @endslot
       @slot('body')
-        <p>Accountability</p>
+        <p>Hold your ISP accountable by tracking your speeds and seeing when they lapse.</p>
       @endslot
-      @slot('footer', 'Accountability')
-
+      @slot('footer', '')
     @endcomponent
+
     @component('partials/card')
        @slot('title')
-        <p>Power</p>
+        <p>Trends</p>
       @endslot
-      @slot('body', 'Power')
-      @slot('footer', 'Power')
-    @endcomponent
-      @component('partials/card')
-       @slot('title')
-        <p>Methanphetamines</p>
+       @slot('body')
+        <p>Easily track your speeds over time to get the bigger picture about your data.</p>
       @endslot
-      @slot('body', 'Methanphetamines')
-      @slot('footer', 'Methanphetamines')
+      @slot('footer', '')
     @endcomponent
+
   </div>
 
 @endsection

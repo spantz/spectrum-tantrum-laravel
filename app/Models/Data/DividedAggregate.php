@@ -7,7 +7,7 @@ namespace App\Models\Data;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-class TimestampAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeEmpty
+class DividedAggregate implements Jsonable, Arrayable, \JsonSerializable, CanBeEmpty
 {
     use ChecksNotEmpty;
 
