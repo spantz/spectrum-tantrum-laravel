@@ -15,12 +15,11 @@ class Clipboard extends Component {
 
     render() {
       return (
-        <div className="clipboard" onClick={this.copy}>
+        <code className="clipboard" onClick={this.copy}>
           {this.props.children}
-        </div>
+        </code>
       );
     }
   }
-  
+
   export default Clipboard;
-  
