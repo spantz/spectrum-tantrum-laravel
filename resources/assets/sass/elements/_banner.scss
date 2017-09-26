@@ -1,0 +1,22 @@
+.banner {
+
+  &--main {
+    padding:  28vmin 7vmin;
+    color: white;
+
+    .head,
+    .subhead {
+      // font-weight: 500;
+    }
+
+    .head {
+      font-size: 3em;
+      font-weight: 500;
+      margin-bottom: .2em;
+    }
+    .subhead {
+      font-size: 2em;
+    }
+  }
+  background: linear-gradient($header-background, map-get($blue, 1))
+}
