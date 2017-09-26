@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\DashboardRequest;
+use App\Http\RouteConstants;
 use App\Http\ViewConstants;
+use App\Models\Repository\DeviceRepository;
 use App\Services\DashboardAggregateService;
 use Illuminate\Http\Request;
 
@@ -33,10 +35,15 @@ class DashboardController extends Controller
      * @method GET
      * @route /dashboard
      * @param Request $request
+     * @param DeviceRepository $repository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, DeviceRepository $repository)
     {
+        if (!$repository->userHasDevices($request->user())) {
+            return redirect()->route(RouteConstants::DEVICE_REGISTRATION);
+        }
+
         $aggregateData = $this->getService()->getDashboardAggregates($request->user());
         return view(ViewConstants::DASHBOARD, $aggregateData->all());
     }
