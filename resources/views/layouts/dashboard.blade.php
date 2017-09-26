@@ -20,14 +20,13 @@
           @endcomponent
         @show
 
-        @yield('banner')
-        <div class="content">
-            @yield('content')
-        </div>
+       <div class="content white">
+        <div id="dashboard"></div>
+       </div>
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
+
 </body>
 </html>

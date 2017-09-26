@@ -1,32 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
-import {Line} from 'react-chartjs-2';
+import SpeedGraph from './SpeedGraph.js';
 import moment from 'moment';
 
-export default({data, options}) => {
 
-    const lineData = {
-        labels: data.user.user.dates.map(d => moment(d).format("MMM Do h:mm a")),
-        datasets: [
-            {
-                label: "Download Speed (mpbs)",
-                backgroundColor: "rgba(0,0,0,.6)",
-                data: data.user.user.down.map(speed => (speed/1000)*8 )
-            },
-            {
-                label: "Upload Speed (mpbs)",
-                backgroundColor: "rgba(0,0,0,.4)",
-                data: data.user.user.up.map(speed => (speed/1000)*8 )
-            },
-            {
-                label: "Supposed speed",
-                backgroundColor: "rgba(255,0, 0, 1)",
-                data: [100]
-            },
-        ]
-    };
-    return (
-        <Line data={lineData} options={{animation: { duration: 0 }, hover: {}, animationDuration: 0,  responsiveAnimationDuration: 0}}></Line>
-    )
-}
+class Dashboard  extends Component {
+
+    constructor(props, options){
+      super(props, options);
+      let data = props.data;
+      this.state = {
+        "activeView": 'download',
+        "dates": data.user.user.dates.map(d => moment(d).format("MMM Do h:mm a")),
+        "uploads": data.user.user.up.map(speed => (speed/1000)*8 ),
+        "downloads": data.user.user.down.map(speed => (speed/1000)*8 ),
+        "supposedSpeed": 100
+      };
+
+      this.viewChange = this.viewChange.bind(this);
+    }
+
+    viewChange(e){
+      this.setState({activeView: e.target.options[e.target.selectedIndex].value})
+    }
+
+    activeView(){
+      if (this.state.activeView == "download") {
+        return <SpeedGraph labels={this.state.dates} lineData={this.state.downloads} label="Downloads"/>
+      }  else {
+        return <SpeedGraph labels={this.state.dates} lineData={this.state.uploads} label="Uploads"/>
+      }
+    }
+
+
+    render(){
+      return  (
+          <div className="dashboard">
+            <div className="dashboard-header">
+              <h1>Dashboard</h1>
+              <select className="input" value={this.state.activeView} onChange={this.viewChange}>
+                <option value="download">Download</option>
+                <option value="upload">Upload</option>
+              </select>
+            </div>
+            {this.activeView()}
+          </div>
+      );
+    }
+  }
+
+  export default Dashboard;

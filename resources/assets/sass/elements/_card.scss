@@ -1,13 +1,37 @@
 .card {
+    font-size: 1rem;
     border-radius: 4px;
     box-shadow: 0 0 1em rgba(0,0,0,.2);
+    background: white;
     overflow: hidden;
-    
+
+    z-index: 1;
     .header {
-        padding: 1em 2em;
-        
+        background: white;
+        height: auto;
+
+        &.tabs {
+          padding: 0;
+        }
+
+        .tab {
+          background: gray;
+          padding: .5em 1em;
+          display: block;
+          flex: 1;
+
+          &.active {
+            background: transparent;
+          }
+        }
+        .button {
+          background: map-get($blue, 2)
+        }
+
         .title {
-            font-size: 2rem;
+          font-size: 1.5em;
+          font-weight: 700;
+          color: black;
         }
 
         &.red {
@@ -17,16 +41,28 @@
     }
     .body {
         padding: 2em;
+        .label {
+          margin:.5em 0;
+
+        }
+        label {
+          margin-bottom: 1em;
+        }
     }
     .footer {
         margin-top: 1em;
-        display: flex;
+
         border-top: 1px rgba(0,0,0,.1) solid;
-        
-        .button {
-            margin-left: 0;
-            flex: 1;
-            border-radius: 0;
-        }
+        font-size: 1.5em;
     }
+
+}
+
+.cards {
+  display: flex;
+  padding: 1em;
+  .card {
+    flex: 1;
+    margin: 1em;
+  }
 }

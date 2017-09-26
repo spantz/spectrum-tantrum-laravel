@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('scripts')
     <script id="aggreate-data" type="application/json">
@@ -11,5 +11,5 @@
 @endsection
 
 @section('content')
-    <div id="dashboard" ></div>
+    <div id="dashboard"></div>
 @endsection

@@ -2,15 +2,17 @@
 
 @section('content')
 <div class="u-flex center">
-    <div class="card">
-        <div class="header">
-            <h1 class="title">Registration</h1>
-        </div>
-        <form method="POST" action="{{ route('register') }}">
-            <div class="body">
+
+<div class="card">
+  <div class="header tabs">
+     <a href="{{ url('login') }}" class="title tab ">Login</a>
+     <a href="{{ url('register') }}" class="title tab active">Register</a>
+  </div>
+  <div class="body">
+     <form method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
                 <label>
-                    <h2>Name</h2>
+                     <div class="label">Name</div>
                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
                      @if ($errors->has('name'))
                         <div class="error">
@@ -19,7 +21,7 @@
                     @endif
                 </label>
                 <label>
-                    <h2>Email Address</h2>
+                     <div class="label">Email Address</div>
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                      @if ($errors->has('name'))
                         <div class="error">
@@ -28,32 +30,31 @@
                     @endif
                 </label>
                  <label>
-                    <h2>Password</h2>
+                     <div class="label">Password</div>
                     <input id="password" type="password" class="form-control" name="password" required>
                      @if ($errors->has('password'))
-                        <span class="error">
+                        <div class="error">
                             <strong>{{ $errors->first('password') }}</strong>
-                        </span>
+                        </div>
                     @endif
                 </label>
                 <label>
-                    <h2>Confirm Password</h2>
+                     <div class="label">Confirm Password</div>
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                 </label>
                 <label>
-                    <h2>Expected Speed (Mb)</h2>
+                     <div class="label">Expected Speed (Mb)</div>
                     <input id="expected-speed" type="number" class="form-control" name="expected_speed" required>
                     @if ($errors->has('expected_speed'))
-                        <span class="error">
+                        <div class="error">
                             <strong>{{ $errors->first('expected_speed') }}</strong>
-                        </span>
+                        </div>
                     @endif
                 </label>
-            </div>
-            <div class="footer">
-                <button type="submit" href="{{ url('register') }}" class="button primary">Register</button>
-            </div>    
-        </form>      
-    </div>
+
+            <button type="submit" href="{{ url('register') }}" class="button primary">Register</button>
+        </form>
+  </div>
 </div>
+
 @endsection

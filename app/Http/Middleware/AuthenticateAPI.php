@@ -28,14 +28,12 @@ class AuthenticateAPI
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->header('Authorization')) {
+        if (!$request->header('Authorization')) {
             return response('No auth token detected. Access forbidden.', 403);
-        }
-        else {
+        } else {
             try {
                 $decryptedToken = TokenUtil::decryptToken($request->header('Authorization'));
-            }
-            catch(Exception $ex) {
+            } catch (Exception $ex) {
                 return response('Invalid auth token. Access forbidden.', 403);
             }
 
@@ -45,7 +43,7 @@ class AuthenticateAPI
             $id = $explodedToken[TokenUtil::ID_INDEX];
             $timestamp = $explodedToken[TokenUtil::TIMESTAMP_INDEX];
 
-            if($tokenType === TokenUtil::DEVICE) {
+            if ($tokenType === TokenUtil::DEVICE) {
 
                 $this->repository->setModel(Device::class);
 
@@ -59,7 +57,7 @@ class AuthenticateAPI
                     ])
                     ->first();
 
-                if(!$device) {
+                if (!$device) {
                     return response('Invalid auth token. Access forbidden.', 403);
                 } else {
                     $user = $device->user;
@@ -67,8 +65,7 @@ class AuthenticateAPI
                     Auth::login($user);
                     return $next($request);
                 }
-            }
-            elseif($tokenType === TokenUtil::USER){
+            } elseif ($tokenType === TokenUtil::USER) {
 
                 $this->repository->setModel(User::class);
 
@@ -81,10 +78,9 @@ class AuthenticateAPI
                     ])
                     ->first();
 
-                if(!$user) {
+                if (!$user) {
                     return response('Invalid auth token. Access forbidden.', 403);
-                }
-                else {
+                } else {
                     Auth::login($user);
                     return $next($request);
                 }

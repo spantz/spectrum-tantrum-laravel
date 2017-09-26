@@ -1,9 +1,13 @@
 @import 'reset';
-html,
-body {
+html {
   font-family: 'Avenir Next', sans-serif;
-  font-size: 10px;
+  font-size: 1vw;
+}
+
+body {
+  font-size: 1.8rem;
   min-height: 100vh;
+  background: linear-gradient($header-background, map-get($blue, 1));
 }
 
 h1,
@@ -16,20 +20,20 @@ p {
 }
 
 h1 {
-  font-weight: 700;
   font-size: 3.2rem;
+  font-weight: 500;
   line-height: 1.6;
 }
 
 h2 {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 2;
 }
 
 h3 {
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 2;
 }
 
@@ -54,10 +58,15 @@ button {
 label {
   line-height: 1;
   cursor: pointer;
+  display: block;
+
+  .label {
+    font-size: 1.25em;
+  }
 }
 
 input {
-  font-size: 1.6em;
+  font-size: 1.2em;
   padding: 1em .5em;
   min-width: 20em;
   border: 1px rgba(0, 0, 0, .2) solid;

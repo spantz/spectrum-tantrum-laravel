@@ -1,35 +1,31 @@
 .u-flex {
-    display: flex;
-
-    &.center {
-        justify-content: center;
-        align-items: center;
-    }
-
-    &.center-vertically {
-        align-content: center;
-    }
-
-    &.center-horizontally {
-        align-content: center;
-    }
-
-    &.space-between {
-        justify-content: space-between;
-    }
-
-    &.no-stretch {
-        align-items: flex-start;
-    }
-
-    .one-column {
-        flex: 1;
-    }
-
-    .two-column {
-        flex: 2;
-    }
-    .three-column {
-        flex: 3;
-    }
+  display: flex;
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+  &.center-vertically {
+    align-content: center;
+  }
+  &.center-horizontally {
+    align-content: center;
+  }
+  &.space-between {
+    justify-content: space-between;
+  }
+  &.flex-end {
+    justify-content: flex-end;
+  }
+  &.no-stretch {
+    align-items: flex-start;
+  }
+  .one-column {
+    flex: 1;
+  }
+  .two-column {
+    flex: 2;
+  }
+  .three-column {
+    flex: 3;
+  }
 }
