@@ -29,8 +29,12 @@ Route::post('register', 'Auth\RegisterController@register');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/devices', 'HomeController@deviceRegistration')
+    Route::get('/devices/register', 'HomeController@deviceRegistration')
         ->name(RouteConstants::DEVICE_REGISTRATION);
+
+    Route::get('/devices', function () {
+        return redirect()->route(RouteConstants::DEVICE_REGISTRATION);
+    });
 
     Route::group(['prefix' => '/dashboard'], function () {
         Route::get('/', 'DashboardController@index')
