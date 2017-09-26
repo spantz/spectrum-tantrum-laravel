@@ -2,11 +2,19 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\RouteConstants;
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\AuthManager;
 
 class RedirectIfAuthenticated
 {
+    private $auth;
+
+    public function __construct(AuthManager $auth)
+    {
+        $this->auth = $auth;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -17,8 +25,8 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        if ($this->auth->guard($guard)->check()) {
+            return redirect()->route(RouteConstants::DASHBOARD);
         }
 
         return $next($request);
