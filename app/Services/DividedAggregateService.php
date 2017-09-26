@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Models\Data\TimestampAggregate;
+use App\Models\Data\DividedAggregate;
 use App\Models\Data\TimestampAggregateResult;
 use App\Models\Repository\TestRepository;
 use App\Models\User;
@@ -78,7 +78,7 @@ class DividedAggregateService
         $upSD = collect();
         $pingSD = collect();
         $raw->each(function ($result) use ($dates, $down, $up, $ping, $downSD, $upSD, $pingSD) {
-            $aggregate = new TimestampAggregate($result);
+            $aggregate = new DividedAggregate($result);
             $dates->push($aggregate->getDate());
             $down->push($aggregate->getDownload());
             $up->push($aggregate->getUpload());

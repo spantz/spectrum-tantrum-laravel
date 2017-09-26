@@ -11,12 +11,12 @@ class OverviewAggregate implements Jsonable, \JsonSerializable, Arrayable, CanBe
 {
     use ChecksNotEmpty;
 
-    const DOWNLOAD_AVG = 'download_average';
-    const UPLOAD_AVG = 'upload_average';
-    const PING_AVG = 'ping_average';
-    const DOWNLOAD_STDEV = 'download_stdev';
-    const UPLOAD_STDEV = 'upload_stdev';
-    const PING_STDEV = 'ping_stdev';
+    const DOWNLOAD_AVG = 'downloadAverage';
+    const UPLOAD_AVG = 'uploadAverage';
+    const PING_AVG = 'pingAverage';
+    const DOWNLOAD_STDEV = 'downloadStandardDeviation';
+    const UPLOAD_STDEV = 'uploadStandardDeviation';
+    const PING_STDEV = 'pingStandardDeviation';
 
     private $downloadAverage;
     private $uploadAverage;
