@@ -56,10 +56,10 @@ class DashboardAggregateService
         $roundDurationInDays = $this->convertDurationToDays($roundDuration, $roundDurationUnit);
 
         $overview = $this->getOverviewService()
-            ->getUserAndGlobalAggregates($user, $durationInDays);
+            ->getUserOverviewAggregate($user, $durationInDays);
 
         $divided = $this->getDividedService()
-            ->getDividedUserAndGlobalAggregates($user, $durationInDays, $roundDurationInDays);
+            ->getDividedAggregate($user, $durationInDays, $roundDurationInDays);
 
         return collect([
             'overview' => $overview,

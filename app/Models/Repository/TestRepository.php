@@ -32,10 +32,12 @@ class TestRepository extends ModelRepository
     {
         $query = \DB::table('tests')
             ->select([
-                \DB::raw('ROUND(max(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_MAX . '`'),
-                \DB::raw('ROUND(min(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_MIN . '`'),
-                \DB::raw('ROUND(avg(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_AVERAGE . '`'),
-                \DB::raw('ROUND(stddev(`download_speed`), 2) as `' . OverviewAggregate::COLUMN_STANDARD_DEVIATION . '`')
+                \DB::raw('ROUND(avg(`download_speed`), 2) as `' . OverviewAggregate::DOWNLOAD_AVG . '`'),
+                \DB::raw('ROUND(avg(`upload_speed`), 2) as `' . OverviewAggregate::UPLOAD_AVG . '`'),
+                \DB::raw('ROUND(avg(`ping`), 2) as `' . OverviewAggregate::PING_AVG . '`'),
+                \DB::raw('ROUND(stddev(`download_speed`), 2) as `' . OverviewAggregate::DOWNLOAD_STDEV . '`'),
+                \DB::raw('ROUND(stddev(`upload_speed`), 2) as `' . OverviewAggregate::UPLOAD_STDEV . '`'),
+                \DB::raw('ROUND(stddev(`ping`), 2) as `' . OverviewAggregate::PING_STDEV . '`')
             ])
             ->from('tests')
             ->join('devices', 'tests.device_id', '=', 'devices.id')
