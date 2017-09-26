@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/devices/register', 'HomeController@deviceRegistration')
         ->name(RouteConstants::DEVICE_REGISTRATION);
 
+    Route::get('/devices/check', 'HomeController@checkForDevice')
+        ->name(RouteConstants::DEVICE_CHECK);
+
     Route::get('/devices', function () {
         return redirect()->route(RouteConstants::DEVICE_REGISTRATION);
     });
