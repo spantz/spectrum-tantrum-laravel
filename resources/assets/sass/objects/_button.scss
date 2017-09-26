@@ -1,16 +1,17 @@
 .button {
   background: #FFFFFF;
-  border-radius: .5em;
-  font-family: 'Avenir Next', sans-serif;
-  font-size: 2em;
-  padding: .5em 1em;
+  border-radius: 2px;
+  font-size: 1em;
+  line-height: 2;
+  padding: .35em .75em;
   margin-left: .25em;
   color: #6D6D6D;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
   border: none;
-  
+  transition: background 50ms ease-in-out;
+
   &:hover {
     background: #DDD;
   }
@@ -20,7 +21,7 @@
   }
 
   &.primary {
-    background: #047DB6;
+    background: map-get($blue, 1 );
     color: #C5FFFF;
   }
 }
