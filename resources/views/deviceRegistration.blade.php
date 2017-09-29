@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="setup-instructions u-flex space-between no-stretch">
+<div class="setup-instructions u-flex wrap space-between no-stretch">
     <div class="card u-good-measure two-column u-margin-right _5  slide-up delay-500">
         <div class="header red">
             <h2>Let's setup a device!</h2>

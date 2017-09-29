@@ -1,11 +1,11 @@
 @import 'reset';
 html {
   font-family: 'Avenir Next', sans-serif;
-  font-size: 1vw;
+  font-size: 12px;
 }
 
 body {
-  font-size: 1.8rem;
+  font-size: 1rem;
   min-height: 100vh;
   background: linear-gradient($header-background, map-get($blue, 1));
 }

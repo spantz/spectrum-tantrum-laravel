@@ -4,10 +4,6 @@
   </div>
   <div class="body">
     {{$body}}
-
-    <div class="footer">
-      {{$footer}}
-    </div>
   </div>
 
 </div>

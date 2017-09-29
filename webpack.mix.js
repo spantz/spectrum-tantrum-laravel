@@ -15,7 +15,7 @@ mix.react('resources/assets/js/app.js', 'public/js')
    .react('resources/assets/js/pages/Dashboard.js', 'public/js/pages')
    .react('resources/assets/js/pages/DeviceRegistration.js', 'public/js/pages')   
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .browserSync('http://192.168.10.150/');;
+   .browserSync('http://192.168.10.10');;
 
 // Full API
 // mix.js(src, output);
