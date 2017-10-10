@@ -16,7 +16,7 @@ class Clipboard extends Component {
     render() {
       return ( 
         <code className="clipboard" onClick={this.copy}>
-          <p class="clipboard__content">{this.props.children}</p>
+          <p className="clipboard__content">{this.props.children}</p>
         </code>
       );
     }

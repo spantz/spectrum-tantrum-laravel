@@ -22,18 +22,27 @@
         bottom: 0;
         left: 0;
         right: 0;
-        // padding: .25em;
-        line-height: 2.75;
-        font-size: 1em;
-        background: rgba(0,0,0,.9);
+        padding: .3em;
+        line-height: 2;
+        font-size: 1.25em;
+        background: rgba(0,0,0,.7);
         color: white;
         content: 'Copy';
         text-align: center;
+
+        
     }
 
     &:hover {
         &:after {
             opacity: 1;
+        }
+    }
+
+    &:active {
+        &:after {
+            background: black;
+
         }
     }
 }
