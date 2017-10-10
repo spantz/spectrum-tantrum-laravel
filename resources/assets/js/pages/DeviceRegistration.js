@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Clipboard from '../components/Clipboard';
-let token = document.getElementById('token').dataset.token;
+let root = document.getElementById('root');
+let token = root.dataset.token;
 
 class DeviceRegistration extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      token
+      token,
     };
   }
   render(){
@@ -29,11 +30,25 @@ class DeviceRegistration extends React.Component {
             </li>
           </ul>
          
+          <h3>Step 1: Download the project</h3>          
+          <Clipboard>
+            git clone whateverthelink.com test-folder
+          </Clipboard>
 
+          <h3>Step 2: Navigate to the folder</h3>          
+          <Clipboard>
+            cd test-folder
+          </Clipboard>
+
+          <h3>Step 3: Install dependancies</h3>          
+          <Clipboard>
+            yarn
+          </Clipboard>
+
+          <h3>Step 4: I</h3>
           <Clipboard>
             npm run register -- --token '{this.state.token}'
           </Clipboard>
-
         </div>
       </div>
     );
@@ -42,5 +57,5 @@ class DeviceRegistration extends React.Component {
 
 ReactDOM.render(
   <DeviceRegistration></DeviceRegistration>,
-  document.getElementById('root')
+  root
 );

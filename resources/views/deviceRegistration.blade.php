@@ -21,7 +21,6 @@
         </div>
 
     </div>
-    <div id="root" class="card u-margin three-column slide-up delay-1100"></div>
+    <div id="root" class="card u-margin three-column slide-up delay-1100" data-token="{{$user->token}}"></div>
 </div>
-<div id="token" data-token="{{$user->token}}"></div>
 @endsection
