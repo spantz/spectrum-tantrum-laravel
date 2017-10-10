@@ -16,7 +16,7 @@
                 In order to test your internet speed, we'll need to
                 communicate with some computer on your local network.
                 We'd reccomend something like a Raspberry Pi, but as long as you can
-                meet the minimum requirements, you should be good!
+                meet the minimum requirements, you should be good! All you need is a Node 7.10.0 or above.
             </p>
         </div>
 

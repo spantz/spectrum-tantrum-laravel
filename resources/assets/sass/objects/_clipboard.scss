@@ -5,6 +5,11 @@
     white-space: nowrap;
     
     overflow: hidden;
+    ::selection {
+        color: inherit;
+        background: inherit;
+      }
+      
     &__content {
         vertical-align: middle;
         display: inline;
