@@ -1,13 +1,39 @@
 .clipboard {
+    font-size: 1.2rem;
     position: relative;
-    vertical-align: middle;
     cursor: pointer;
+    white-space: nowrap;
+    
+    overflow: hidden;
+    &__content {
+        vertical-align: middle;
+        display: inline;
+        white-space: nowrap;
+        overflow: scroll;
+        text-overflow: fade;
+        padding: .25em;
+        line-height: 2;
+    }
     &:after {
+        opacity: 0;
+        transition: opacity 200ms ease-in-out;
         position: absolute;
-        right: 0;
-        top: 45%;
+        top: 0;
         bottom: 0;
-        font-size: 1.2em;
+        left: 0;
+        right: 0;
+        // padding: .25em;
+        line-height: 2.75;
+        font-size: 1em;
+        background: rgba(0,0,0,.9);
+        color: white;
         content: 'Copy';
+        text-align: center;
+    }
+
+    &:hover {
+        &:after {
+            opacity: 1;
+        }
     }
 }
